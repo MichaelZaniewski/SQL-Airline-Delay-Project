@@ -4,7 +4,12 @@ An analysis of American Airlines' departure statistics using PostgreSQL to deter
 ## Introduction
 
 
-## Data Cleaning 
+## Data Preparation 
 ### Excel Formatting
 
 ### SQL Clean-up
+
+
+
+## Findings
+### Average Delay by Base
