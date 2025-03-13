@@ -13,3 +13,8 @@ An analysis of American Airlines' departure statistics using PostgreSQL to deter
 
 ## Findings
 ### Average Delay by Base
+
+
+
+## Reccomendations
+- Being that late_ac_arrivals are the #1 cause of delayed flights, AA should focus on
