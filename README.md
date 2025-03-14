@@ -126,40 +126,21 @@ FROM delay
 ```
 
 ### 8) Of the flights that departed late, what percentage were attributed to late_ac delays and carrier delays for morning and afternoon departures
-FOR MORNING:
-FOR AFTERNOON: (SHOW TABLES NOT CODE. SHOW CODE ONLY ONCE AND EXPLAIN TO SQITCH THE WHERE CLAUSE TO >= FOR AFTERNOON)
 ```
-SELECT COUNT(total_delay) AS count_total_delayed_morning_flights,
-	   TO_CHAR(100*(COUNT(*) FILTER(WHERE carrier_delay > late_ac_arrival_delay)) / COUNT(total_delay),'999D99%') AS precent_carrier_delayed_morning,
-	   TO_CHAR(100*(COUNT(*) FILTER(WHERE late_ac_arrival_delay > carrier_delay)) / COUNT(total_delay),'999D99%') AS precent_late_ac_delayed_morning,
-	   TO_CHAR(100*(COUNT(*) FILTER(WHERE carrier_delay = 0 AND late_ac_arrival_delay = 0)) / COUNT(*),'999D99%') AS precent_other_delayed_morning
-FROM 	(SELECT *, 	CASE
-				WHEN departure_delay > 0 OR departure_delay > almost_total_delay 
-				THEN SUM(almost_total_delay + pos_difference)
-				WHEN departure_delay < 0 OR departure_delay < almost_total_delay 
-				THEN SUM(almost_total_delay + neg_difference)
-				ELSE 0
-			END AS total_delay
-	FROM (SELECT *, COALESCE(SUM(almost_total_delay - departure_delay) FILTER(WHERE departure_delay >0), departure_delay) AS neg_difference,
-				COALESCE(ABS(SUM(almost_total_delay - departure_delay) FILTER(WHERE departure_delay >0)), ABS(departure_delay)) AS pos_difference				
-		FROM (SELECT sched_departure, id, origin, departure_delay, carrier_delay, weather_delay, national_aviation_sys_delay, security_delay, late_ac_arrival_delay,
-			SUM (carrier_delay +
-				weather_delay +
-				national_aviation_sys_delay +
-				security_delay +
-				late_ac_arrival_delay) AS almost_total_delay
-			FROM delay
-			GROUP BY id) AS z
-		GROUP BY sched_departure, id, origin, departure_delay, carrier_delay, weather_delay, national_aviation_sys_delay, security_delay, late_ac_arrival_delay, z.almost_total_delay) AS y
-	GROUP BY sched_departure, id, origin, departure_delay, carrier_delay, weather_delay, national_aviation_sys_delay, security_delay, late_ac_arrival_delay, y.almost_total_delay, y.neg_difference, y.pos_difference
-	HAVING CASE
-		WHEN departure_delay > 0 OR departure_delay > almost_total_delay 
-		THEN SUM(almost_total_delay + pos_difference)
-		WHEN departure_delay < 0 OR departure_delay < almost_total_delay 
-		THEN SUM(almost_total_delay + neg_difference)
-		ELSE 0
-		END > 0)	
-WHERE sched_departure < '12:00:00'
+SELECT time_of_day, 
+	COUNT(*) FILTER(WHERE departure_delay > 0) AS count_delayed_departures,
+	TO_CHAR(100*(COUNT(*) FILTER(WHERE carrier_delay > late_ac_arrival_delay)) / COUNT(*) FILTER(WHERE departure_delay >0), '999D99%') AS carrier_delayed,
+	TO_CHAR(100*(COUNT(*) FILTER(WHERE late_ac_arrival_delay > carrier_delay)) / COUNT(*) FILTER(WHERE departure_delay >0), '999D99%') AS late_ac_delayed,
+	TO_CHAR(100*(COUNT(*) FILTER(WHERE carrier_delay = 0 AND late_ac_arrival_delay = 0 AND departure_delay >0)) / COUNT(*) FILTER(WHERE departure_delay >0), '999D99%') AS other_delayed
+FROM	(SELECT *, 
+		CASE
+			WHEN sched_departure < '12:00:00' THEN 'MORNING'
+			WHEN sched_departure >= '12:00:00' THEN 'AFTERNOON'
+			ELSE NULL
+		END AS time_of_day
+	FROM delay)
+GROUP BY time_of_day 
+ORDER BY count_delayed_departures ASC
 ```
 
 
