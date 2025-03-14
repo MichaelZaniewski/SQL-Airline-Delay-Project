@@ -39,7 +39,7 @@ FROM delay
 ## DIGGING DEEPER
 ### 4) What were the top 5 most delayed flights?
 ```
-SELECT id, origin, departure_delay, carrier_delay, weather_delay, national_aviation_sys_delay, security_delay, late_ac_arrival_delay, 	
+SELECT id, origin, sched_departure, actual_departure, 	
 	CASE
 		WHEN departure_delay > 0 OR departure_delay > almost_total_delay 
 		THEN SUM(almost_total_delay + pos_difference)
@@ -48,8 +48,8 @@ SELECT id, origin, departure_delay, carrier_delay, weather_delay, national_aviat
 		ELSE 0
 	END AS total_delay
 FROM (SELECT *, COALESCE(SUM(almost_total_delay - departure_delay) FILTER(WHERE departure_delay >0), departure_delay) AS neg_difference,
-		COALESCE(ABS(SUM(almost_total_delay - departure_delay) FILTER(WHERE departure_delay >0)), ABS(departure_delay)) AS pos_difference						
-	FROM 		(SELECT id, origin, departure_delay, carrier_delay, weather_delay, national_aviation_sys_delay, security_delay, late_ac_arrival_delay,
+		COALESCE(ABS(SUM(almost_total_delay - departure_delay) FILTER(WHERE departure_delay >0)), ABS(departure_delay)) AS pos_difference		
+	FROM 		(SELECT id, origin, sched_departure, actual_departure, departure_delay, carrier_delay, weather_delay, national_aviation_sys_delay, security_delay, late_ac_arrival_delay,
 			SUM (carrier_delay +
 				weather_delay +
 				national_aviation_sys_delay +
@@ -57,9 +57,8 @@ FROM (SELECT *, COALESCE(SUM(almost_total_delay - departure_delay) FILTER(WHERE 
 				late_ac_arrival_delay) AS almost_total_delay
 			FROM delay
 			GROUP BY id) AS z
-	 GROUP BY id, origin, departure_delay, carrier_delay, weather_delay, national_aviation_sys_delay, security_delay, late_ac_arrival_delay, 
-	   			z.almost_total_delay) AS y
-GROUP BY id, origin, departure_delay, carrier_delay, weather_delay, national_aviation_sys_delay, security_delay, late_ac_arrival_delay, y.almost_total_delay, y.neg_difference, y.pos_difference
+	 GROUP BY id, origin, sched_departure, actual_departure, departure_delay, carrier_delay, weather_delay, national_aviation_sys_delay, security_delay, late_ac_arrival_delay, z.almost_total_delay) AS y
+GROUP BY id, origin, sched_departure, actual_departure, departure_delay, y.late_ac_arrival_delay, y.almost_total_delay, y.neg_difference, y.pos_difference
 ORDER BY total_delay DESC, late_ac_arrival_delay DESC
 LIMIT 5
 ```
