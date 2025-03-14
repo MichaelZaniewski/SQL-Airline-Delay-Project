@@ -35,7 +35,7 @@ SELECT
 FROM delay
 ```
 ## DIGGING DEEPER
-### 1) What were the top 5 most delayed flights?
+### 4) What were the top 5 most delayed flights?
 ```
 SELECT id, origin, departure_delay, carrier_delay, weather_delay, national_aviation_sys_delay, security_delay, late_ac_arrival_delay, 	
 	CASE
@@ -61,7 +61,7 @@ GROUP BY id, origin, departure_delay, carrier_delay, weather_delay, national_avi
 ORDER BY total_delay DESC, late_ac_arrival_delay DESC
 LIMIT 5
 ```
-### 2) Median delay length for each delay category per base for only situations where there was a delay. Bases ranked from most delayed to least delayed.
+### 5) Median delay length for each delay category per base for only situations where there was a delay. Bases ranked from most delayed to least delayed.
 ```
 SELECT RANK() OVER (ORDER BY total_mdn_dly DESC) AS top_mdn_dlyd_base_rank, * 
 FROM (SELECT 	origin, 
@@ -86,7 +86,7 @@ FROM (SELECT 	origin,
 GROUP BY origin, mdn_dept_dly, mdn_taxi, mdn_carrier_dly, mdn_weather_dly, mdn_atc_dly, mdn_security_dly, mdn_late_ac_dly
 ORDER BY total_mdn_dly DESC)
 ```
-### 3) What day of the week saw the longest total_delays?
+### 6) What day of the week saw the longest total_delays?
 ```
 SELECT day_of_week, SUM(total_delay) AS total_delay_time
 FROM (SELECT TO_CHAR(date, 'DAY') AS day_of_week,
@@ -112,7 +112,7 @@ FROM (SELECT TO_CHAR(date, 'DAY') AS day_of_week,
 GROUP BY day_of_week
 ORDER BY total_delay_time DESC
 ```
-### 4) Of total flights, how many left in the morning vs afternoon? What percent of morning and afternoon flights went out on time vs late?
+### 7) Of total flights, how many left in the morning vs afternoon? What percent of morning and afternoon flights went out on time vs late?
 ```
 SELECT  COUNT(*) AS total_flights,
 	COUNT(*) FILTER(WHERE sched_departure < '12:00:00') AS total_morning_flights,
@@ -124,7 +124,7 @@ SELECT  COUNT(*) AS total_flights,
 FROM delay
 ```
 
-### 5) Of the delayed flights, what percentage were attributed to late_ac_delays or carrier_delays for morning and afternoon departures
+### 8) Of the delayed flights, what percentage were attributed to late_ac_delays or carrier_delays for morning and afternoon departures
 FOR MORNING:
 FOR AFTERNOON: (SHOW TABLES NOT CODE. SHOW CODE ONLY ONCE AND EXPLAIN TO SQITCH THE WHERE CLAUSE TO >= FOR AFTERNOON)
 ```
@@ -163,9 +163,12 @@ WHERE sched_departure < '12:00:00'
 
 
 ## Findings - prerequisit for understanding reccomendations
-
-
+- Most median delayed base is PHL
+- There are signficantly more departures in the afternoon than the morning
 
 
 ## RECCOMENDATIONS
 - Being that late_ac_arrivals are the #1 cause of delayed flights, AA should focus on
+- Focus on on-time departures in the morning so the planes can operate on-time for the later departures then shift priority to customer experience during times when there are the most customers.
+
+- A/B testing using PHL base as the experimental group, the base that stands to improve the most from delays (figure 5)
