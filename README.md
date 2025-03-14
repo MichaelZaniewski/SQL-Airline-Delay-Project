@@ -4,7 +4,7 @@ An analysis of American Airlines' departure statistics using PostgreSQL to deter
 ## INTRODUCTION
 
 ## Dataset
-- The data for this project was taken from 
+- The data for this project was gathered from 
 
 ## EXPLORATORY ANALYSIS
 ### 1) How many planes did AA operate each year?
