@@ -138,7 +138,7 @@ ORDER BY total_flights ASC
 ```
 
 ### 8) Of the flights that departed late, what percentage were attributed to late_ac delays and carrier delays for morning and afternoon departures
-![Figure8](https://github.com/user-attachments/assets/4e8d84ce-832a-4957-bceb-e2d22eadc364)
+![Figure8](https://github.com/user-attachments/assets/c46c364e-e4b5-49f8-a643-3b8a79a2f65c)
 ```
 SELECT time_of_day, 
 	COUNT(*) FILTER(WHERE departure_delay > 0) AS count_delayed_departures,
