@@ -41,7 +41,7 @@ FROM delay
 ```
 ## DIGGING DEEPER
 ### 4) What were the top 5 most delayed flights?
-![Figure4](https://github.com/user-attachments/assets/e68fa770-11b6-4b4b-996a-9d7ad315fea2)
+![Figure4](https://github.com/user-attachments/assets/8375620a-68cf-4851-bbd6-109f7aa779b5)
 ```
 SELECT id, origin, sched_departure, actual_departure, 	
 	CASE
