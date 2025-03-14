@@ -112,12 +112,21 @@ FROM (SELECT TO_CHAR(date, 'DAY') AS day_of_week,
 GROUP BY day_of_week
 ORDER BY total_delay_time DESC
 ```
-### 4) 
+### 4) Of total flights, how many left in the morning vs afternoon? What percent of morning and afternoon flights went out on time vs late?
+```
+SELECT  COUNT(*) AS total_flights,
+		COUNT(*) FILTER(WHERE sched_departure < '12:00:00') AS total_morning_flights,
+		COUNT(*) FILTER(WHERE sched_departure >= '12:00:00') AS total_afternoon_flights,
+		TO_CHAR(100*(COUNT(departure_delay) FILTER(WHERE departure_delay <=0 AND sched_departure < '12:00:00')) / COUNT(*) FILTER(WHERE sched_departure < '12:00:00'),'999D99%') AS percent_morning_ontime,
+		TO_CHAR(100*(COUNT(departure_delay) FILTER(WHERE departure_delay >0 AND sched_departure < '12:00:00')) / COUNT(*) FILTER(WHERE sched_departure < '12:00:00'),'999D99%') AS percent_morning_delayed,
+		TO_CHAR(100*(COUNT(departure_delay) FILTER(WHERE departure_delay <=0 AND sched_departure >= '12:00:00')) / COUNT(*) FILTER(WHERE sched_departure >= '12:00:00'),'999D99%') AS percent_afternoon_ontime,
+		TO_CHAR(100*(COUNT(departure_delay) FILTER(WHERE departure_delay >0 AND sched_departure >= '12:00:00')) / COUNT(*) FILTER(WHERE sched_departure >= '12:00:00'),'999D99%') AS percent_afternoon_delayed
+FROM delay
+```
 
 
 
-
-- Percentage of total delayed flights that were attributed to late_ac_delays or carrier_delays for morning and afternoon departures
+- Percentage of delayed flights that were attributed to late_ac_delays or carrier_delays for morning and afternoon departures
 FOR MORNING:
 FOR AFTERNOON: (SHOW TABLES NOT CODE. SHOW CODE ONLY ONCE AND EXPLAIN TO SQITCH THE WHERE CLAUSE TO >= FOR AFTERNOON)
 ```
