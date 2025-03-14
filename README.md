@@ -1,10 +1,10 @@
 # SQL-Airline-Delay-Project
 An analysis of American Airlines' departure statistics using PostgreSQL to determine what the airline can optimize to achieve more on-time departures.
 
-## Introduction
+## INTRODUCTION
 
 
-## Exploratory Analysis
+## EXPLORATORY ANALYSIS
 ### 1) How many planes did AA operate each year?
 ```
 SELECT 
@@ -34,7 +34,7 @@ SELECT
 		MAX(late_ac_arrival_delay) AS max_late_ac_dly
 FROM delay
 ```
-## Digging Deeper
+## DIGGING DEEPER
 ### 1) What were the top 5 most delayed flights?
 ```
 SELECT id, origin, departure_delay, carrier_delay, weather_delay, national_aviation_sys_delay, security_delay, late_ac_arrival_delay, 	
@@ -115,18 +115,16 @@ ORDER BY total_delay_time DESC
 ### 4) Of total flights, how many left in the morning vs afternoon? What percent of morning and afternoon flights went out on time vs late?
 ```
 SELECT  COUNT(*) AS total_flights,
-		COUNT(*) FILTER(WHERE sched_departure < '12:00:00') AS total_morning_flights,
-		COUNT(*) FILTER(WHERE sched_departure >= '12:00:00') AS total_afternoon_flights,
-		TO_CHAR(100*(COUNT(departure_delay) FILTER(WHERE departure_delay <=0 AND sched_departure < '12:00:00')) / COUNT(*) FILTER(WHERE sched_departure < '12:00:00'),'999D99%') AS percent_morning_ontime,
-		TO_CHAR(100*(COUNT(departure_delay) FILTER(WHERE departure_delay >0 AND sched_departure < '12:00:00')) / COUNT(*) FILTER(WHERE sched_departure < '12:00:00'),'999D99%') AS percent_morning_delayed,
-		TO_CHAR(100*(COUNT(departure_delay) FILTER(WHERE departure_delay <=0 AND sched_departure >= '12:00:00')) / COUNT(*) FILTER(WHERE sched_departure >= '12:00:00'),'999D99%') AS percent_afternoon_ontime,
-		TO_CHAR(100*(COUNT(departure_delay) FILTER(WHERE departure_delay >0 AND sched_departure >= '12:00:00')) / COUNT(*) FILTER(WHERE sched_departure >= '12:00:00'),'999D99%') AS percent_afternoon_delayed
+	COUNT(*) FILTER(WHERE sched_departure < '12:00:00') AS total_morning_flights,
+	COUNT(*) FILTER(WHERE sched_departure >= '12:00:00') AS total_afternoon_flights,
+	TO_CHAR(100*(COUNT(departure_delay) FILTER(WHERE departure_delay <=0 AND sched_departure < '12:00:00')) / COUNT(*) FILTER(WHERE sched_departure < '12:00:00'),'999D99%') AS percent_morning_ontime,
+	TO_CHAR(100*(COUNT(departure_delay) FILTER(WHERE departure_delay >0 AND sched_departure < '12:00:00')) / COUNT(*) FILTER(WHERE sched_departure < '12:00:00'),'999D99%') AS percent_morning_delayed,
+	TO_CHAR(100*(COUNT(departure_delay) FILTER(WHERE departure_delay <=0 AND sched_departure >= '12:00:00')) / COUNT(*) FILTER(WHERE sched_departure >= '12:00:00'),'999D99%') AS percent_afternoon_ontime,
+	TO_CHAR(100*(COUNT(departure_delay) FILTER(WHERE departure_delay >0 AND sched_departure >= '12:00:00')) / COUNT(*) FILTER(WHERE sched_departure >= '12:00:00'),'999D99%') AS percent_afternoon_delayed
 FROM delay
 ```
 
-
-
-- Percentage of delayed flights that were attributed to late_ac_delays or carrier_delays for morning and afternoon departures
+### 5) Of the delayed flights, what percentage were attributed to late_ac_delays or carrier_delays for morning and afternoon departures
 FOR MORNING:
 FOR AFTERNOON: (SHOW TABLES NOT CODE. SHOW CODE ONLY ONCE AND EXPLAIN TO SQITCH THE WHERE CLAUSE TO >= FOR AFTERNOON)
 ```
@@ -164,10 +162,10 @@ WHERE sched_departure < '12:00:00'
 ```
 
 
-## Findings
-### Average Delay by Base
+## Findings - prerequisit for understanding reccomendations
 
 
 
-## Reccomendations
+
+## RECCOMENDATIONS
 - Being that late_ac_arrivals are the #1 cause of delayed flights, AA should focus on
