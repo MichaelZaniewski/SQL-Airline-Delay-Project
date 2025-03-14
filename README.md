@@ -8,6 +8,7 @@ An analysis of American Airlines' departure statistics using PostgreSQL to deter
 
 ## EXPLORATORY ANALYSIS
 ### 1) How many planes did AA operate each year?
+![Figure1](https://github.com/user-attachments/assets/3593d1cd-d31d-4db6-8076-bd3da590cec7)
 ```
 SELECT 
 	EXTRACT(YEAR FROM date) AS year, 
@@ -18,6 +19,7 @@ GROUP BY EXTRACT(YEAR FROM date)
 ORDER BY YEAR
 ```
 ### 2) Airports ranked from quickest to slowest average taxi time
+![Figure2](https://github.com/user-attachments/assets/642760dc-9892-489b-a5e4-a2b0983cf5ee)
 ```
 SELECT origin, ROUND(AVG(taxi_out_time),2) AS avg_taxi,
 	RANK() OVER (ORDER BY ROUND(AVG(taxi_out_time),2)) AS RANK
@@ -26,6 +28,7 @@ GROUP BY origin
 ORDER BY avg_taxi
 ```
 ### 3) What was the maximum delay for each type of delay?
+![Figure3](https://github.com/user-attachments/assets/65c2495e-f904-4094-8542-d18de3cd35ce)
 ```
 SELECT 	
 		MAX(taxi_out_time) AS max_taxi,
@@ -38,6 +41,7 @@ FROM delay
 ```
 ## DIGGING DEEPER
 ### 4) What were the top 5 most delayed flights?
+![Figure4](https://github.com/user-attachments/assets/e68fa770-11b6-4b4b-996a-9d7ad315fea2)
 ```
 SELECT id, origin, sched_departure, actual_departure, 	
 	CASE
@@ -63,6 +67,7 @@ ORDER BY total_delay DESC, late_ac_arrival_delay DESC
 LIMIT 5
 ```
 ### 5) Median delay length for each delay category per base for only situations where there was a delay. Bases ranked from most delayed to least delayed.
+![Figure5](https://github.com/user-attachments/assets/51dabd0a-8901-4240-af39-4ae173ed23cd)
 ```
 SELECT RANK() OVER (ORDER BY total_mdn_dly DESC) AS top_mdn_dlyd_base_rank, * 
 FROM (SELECT 	origin, 
@@ -88,6 +93,7 @@ GROUP BY origin, mdn_dept_dly, mdn_taxi, mdn_carrier_dly, mdn_weather_dly, mdn_a
 ORDER BY total_mdn_dly DESC)
 ```
 ### 6) What day of the week saw the longest delays?
+![Figure6](https://github.com/user-attachments/assets/e426b046-a398-4eb3-91fa-a866cac21704)
 ```
 SELECT day_of_week, SUM(total_delay) AS total_delay_time
 FROM (SELECT TO_CHAR(date, 'DAY') AS day_of_week,
@@ -114,6 +120,7 @@ GROUP BY day_of_week
 ORDER BY total_delay_time DESC
 ```
 ### 7) Of total flights, how many left in the morning vs afternoon? What percent of morning and afternoon flights departed on time vs late?
+![Figure7](https://github.com/user-attachments/assets/7c15d4d4-447b-45d7-a2b9-f61f34a3606f)
 ```
 SELECT time_of_day, 
 		COUNT(*) AS total_flights,
@@ -131,6 +138,7 @@ ORDER BY total_flights ASC
 ```
 
 ### 8) Of the flights that departed late, what percentage were attributed to late_ac delays and carrier delays for morning and afternoon departures
+![Figure8](https://github.com/user-attachments/assets/4e8d84ce-832a-4957-bceb-e2d22eadc364)
 ```
 SELECT time_of_day, 
 	COUNT(*) FILTER(WHERE departure_delay > 0) AS count_delayed_departures,
