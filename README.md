@@ -115,23 +115,28 @@ ORDER BY total_delay_time DESC
 ```
 ### 7) Of total flights, how many left in the morning vs afternoon? What percent of morning and afternoon flights departed on time vs late?
 ```
-SELECT  COUNT(*) AS total_flights,
-	COUNT(*) FILTER(WHERE sched_departure < '12:00:00') AS total_morning_flights,
-	COUNT(*) FILTER(WHERE sched_departure >= '12:00:00') AS total_afternoon_flights,
-	TO_CHAR(100*(COUNT(departure_delay) FILTER(WHERE departure_delay <=0 AND sched_departure < '12:00:00')) / COUNT(*) FILTER(WHERE sched_departure < '12:00:00'),'999D99%') AS percent_morning_ontime,
-	TO_CHAR(100*(COUNT(departure_delay) FILTER(WHERE departure_delay >0 AND sched_departure < '12:00:00')) / COUNT(*) FILTER(WHERE sched_departure < '12:00:00'),'999D99%') AS percent_morning_delayed,
-	TO_CHAR(100*(COUNT(departure_delay) FILTER(WHERE departure_delay <=0 AND sched_departure >= '12:00:00')) / COUNT(*) FILTER(WHERE sched_departure >= '12:00:00'),'999D99%') AS percent_afternoon_ontime,
-	TO_CHAR(100*(COUNT(departure_delay) FILTER(WHERE departure_delay >0 AND sched_departure >= '12:00:00')) / COUNT(*) FILTER(WHERE sched_departure >= '12:00:00'),'999D99%') AS percent_afternoon_delayed
-FROM delay
+SELECT time_of_day, 
+		COUNT(*) AS total_flights,
+		TO_CHAR(ROUND(100*(COUNT(*) FILTER(WHERE departure_delay <=0) / CAST(COUNT(*) AS numeric)),2),'999D99%') AS on_time,
+		TO_CHAR(ROUND(100*(COUNT(*) FILTER(WHERE departure_delay >0) / CAST(COUNT(*) AS numeric)),2),'999D99%') AS delayed	
+FROM(SELECT *, 
+	CASE
+		WHEN sched_departure < '12:00:00' THEN 'MORNING'
+		WHEN sched_departure >= '12:00:00' THEN 'AFTERNOON'
+		ELSE NULL
+	END AS time_of_day
+FROM delay)
+GROUP BY time_of_day 
+ORDER BY total_flights ASC
 ```
 
 ### 8) Of the flights that departed late, what percentage were attributed to late_ac delays and carrier delays for morning and afternoon departures
 ```
 SELECT time_of_day, 
 	COUNT(*) FILTER(WHERE departure_delay > 0) AS count_delayed_departures,
-	TO_CHAR(100*(COUNT(*) FILTER(WHERE carrier_delay > late_ac_arrival_delay)) / COUNT(*) FILTER(WHERE departure_delay >0), '999D99%') AS carrier_delayed,
-	TO_CHAR(100*(COUNT(*) FILTER(WHERE late_ac_arrival_delay > carrier_delay)) / COUNT(*) FILTER(WHERE departure_delay >0), '999D99%') AS late_ac_delayed,
-	TO_CHAR(100*(COUNT(*) FILTER(WHERE carrier_delay = 0 AND late_ac_arrival_delay = 0 AND departure_delay >0)) / COUNT(*) FILTER(WHERE departure_delay >0), '999D99%') AS other_delayed
+	TO_CHAR(100*(COUNT(*) FILTER(WHERE carrier_delay > late_ac_arrival_delay)) / CAST(COUNT(*) FILTER(WHERE departure_delay >0) AS NUMERIC), '999D99%') AS carrier_delayed,
+	TO_CHAR(100*(COUNT(*) FILTER(WHERE late_ac_arrival_delay > carrier_delay)) / CAST(COUNT(*) FILTER(WHERE departure_delay >0) AS NUMERIC), '999D99%') AS late_ac_delayed,
+	TO_CHAR(100*(COUNT(*) FILTER(WHERE carrier_delay = 0 AND late_ac_arrival_delay = 0 AND departure_delay >0)) / CAST(COUNT(*) FILTER(WHERE departure_delay >0) AS NUMERIC), '999D99%') AS other_delayed
 FROM	(SELECT *, 
 		CASE
 			WHEN sched_departure < '12:00:00' THEN 'MORNING'
