@@ -113,7 +113,7 @@ FROM (SELECT TO_CHAR(date, 'DAY') AS day_of_week,
 GROUP BY day_of_week
 ORDER BY total_delay_time DESC
 ```
-### 7) Of total flights, how many left in the morning vs afternoon? What percent of morning and afternoon flights went out on time vs late?
+### 7) Of total flights, how many left in the morning vs afternoon? What percent of morning and afternoon flights departed on time vs late?
 ```
 SELECT  COUNT(*) AS total_flights,
 	COUNT(*) FILTER(WHERE sched_departure < '12:00:00') AS total_morning_flights,
