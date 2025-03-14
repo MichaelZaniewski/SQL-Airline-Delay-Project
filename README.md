@@ -93,7 +93,7 @@ GROUP BY origin, mdn_dept_dly, mdn_taxi, mdn_carrier_dly, mdn_weather_dly, mdn_a
 ORDER BY total_mdn_dly DESC)
 ```
 ### 6) What day of the week saw the longest delays?
-![Figure6](https://github.com/user-attachments/assets/e426b046-a398-4eb3-91fa-a866cac21704)
+![Figure6](https://github.com/user-attachments/assets/f28ed447-d14d-44a4-8890-a91ef431b11b)
 ```
 SELECT day_of_week, SUM(total_delay) AS total_delay_time
 FROM (SELECT TO_CHAR(date, 'DAY') AS day_of_week,
