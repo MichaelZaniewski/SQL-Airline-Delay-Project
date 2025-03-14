@@ -19,7 +19,7 @@ GROUP BY EXTRACT(YEAR FROM date)
 ORDER BY YEAR
 ```
 ### 2) Airports ranked from quickest to slowest average taxi time
-![Figure2](https://github.com/user-attachments/assets/ad8ddef3-1b21-4f71-a5eb-a709df0d485d)
+![Image](https://github.com/user-attachments/assets/ea83c6ec-cba2-4a35-aa4a-2033036574ea)
 ```
 SELECT origin, ROUND(AVG(taxi_out_time),2) AS avg_taxi,
 	RANK() OVER (ORDER BY ROUND(AVG(taxi_out_time),2)) AS RANK
