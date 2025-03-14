@@ -169,7 +169,8 @@ WHERE sched_departure < '12:00:00'
 - Out of the delayed flights in the morning, most are attributed to carrier delays
 But for delayed flights in the afternoon, the delays are heavily swayed towards late aircraft arrivals (Figure 8)
 
-
+- Late ac arrivals are the #1 cause of late departures (figure 5)
+  
 ## RECCOMENDATIONS
 - Being that late_ac_arrivals are the #1 cause of delayed flights, AA should focus on
 - Focus on on-time departures in the morning so the planes can operate on-time for the later departures then shift priority to customer experience during times when there are the most customers.
