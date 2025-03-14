@@ -34,8 +34,8 @@ SELECT
 		MAX(late_ac_arrival_delay) AS max_late_ac_dly
 FROM delay
 ```
-## Detailed Analysis
-1) What were the top 5 most delayed flights?
+## Digging Deeper
+### 1) What were the top 5 most delayed flights?
 ```
 SELECT id, origin, departure_delay, carrier_delay, weather_delay, national_aviation_sys_delay, security_delay, late_ac_arrival_delay, 	
 	CASE
@@ -61,7 +61,7 @@ GROUP BY id, origin, departure_delay, carrier_delay, weather_delay, national_avi
 ORDER BY total_delay DESC, late_ac_arrival_delay DESC
 LIMIT 5
 ```
-2) Median delay length for each delay category per base for only situations where there was a delay. Bases ranked from most delayed to least delayed.
+### 2) Median delay length for each delay category per base for only situations where there was a delay. Bases ranked from most delayed to least delayed.
 ```
 SELECT RANK() OVER (ORDER BY total_mdn_dly DESC) AS top_mdn_dlyd_base_rank, * 
 FROM (SELECT 	origin, 
@@ -86,7 +86,7 @@ FROM (SELECT 	origin,
 GROUP BY origin, mdn_dept_dly, mdn_taxi, mdn_carrier_dly, mdn_weather_dly, mdn_atc_dly, mdn_security_dly, mdn_late_ac_dly
 ORDER BY total_mdn_dly DESC)
 ```
-3) What day of the week saw the longest total_delays?
+### 3) What day of the week saw the longest total_delays?
 ```
 SELECT day_of_week, SUM(total_delay) AS total_delay_time
 FROM (SELECT TO_CHAR(date, 'DAY') AS day_of_week,
@@ -111,6 +111,48 @@ FROM (SELECT TO_CHAR(date, 'DAY') AS day_of_week,
 	GROUP BY day_of_week, id, origin, departure_delay, carrier_delay, weather_delay, national_aviation_sys_delay, security_delay, late_ac_arrival_delay, y.almost_total_delay, y.neg_difference, y.pos_difference)
 GROUP BY day_of_week
 ORDER BY total_delay_time DESC
+```
+### 4) 
+
+
+
+
+- Percentage of total delayed flights that were attributed to late_ac_delays or carrier_delays for morning and afternoon departures
+FOR MORNING:
+FOR AFTERNOON: (SHOW TABLES NOT CODE. SHOW CODE ONLY ONCE AND EXPLAIN TO SQITCH THE WHERE CLAUSE TO >= FOR AFTERNOON)
+```
+SELECT COUNT(total_delay) AS count_total_delayed_morning_flights,
+	   TO_CHAR(100*(COUNT(*) FILTER(WHERE carrier_delay > late_ac_arrival_delay)) / COUNT(total_delay),'999D99%') AS precent_carrier_delayed_morning,
+	   TO_CHAR(100*(COUNT(*) FILTER(WHERE late_ac_arrival_delay > carrier_delay)) / COUNT(total_delay),'999D99%') AS precent_late_ac_delayed_morning,
+	   TO_CHAR(100*(COUNT(*) FILTER(WHERE carrier_delay = 0 AND late_ac_arrival_delay = 0)) / COUNT(*),'999D99%') AS precent_other_delayed_morning
+FROM 	(SELECT *, 	CASE
+				WHEN departure_delay > 0 OR departure_delay > almost_total_delay 
+				THEN SUM(almost_total_delay + pos_difference)
+				WHEN departure_delay < 0 OR departure_delay < almost_total_delay 
+				THEN SUM(almost_total_delay + neg_difference)
+				ELSE 0
+			END AS total_delay
+	FROM (SELECT *, COALESCE(SUM(almost_total_delay - departure_delay) FILTER(WHERE departure_delay >0), departure_delay) AS neg_difference,
+				COALESCE(ABS(SUM(almost_total_delay - departure_delay) FILTER(WHERE departure_delay >0)), ABS(departure_delay)) AS pos_difference				
+		FROM (SELECT sched_departure, id, origin, departure_delay, carrier_delay, weather_delay, national_aviation_sys_delay, security_delay, late_ac_arrival_delay,
+			SUM (carrier_delay +
+				weather_delay +
+				national_aviation_sys_delay +
+				security_delay +
+				late_ac_arrival_delay) AS almost_total_delay
+			FROM delay
+			GROUP BY id) AS z
+		GROUP BY sched_departure, id, origin, departure_delay, carrier_delay, weather_delay, national_aviation_sys_delay, security_delay, late_ac_arrival_delay, z.almost_total_delay) AS y
+	GROUP BY sched_departure, id, origin, departure_delay, carrier_delay, weather_delay, national_aviation_sys_delay, security_delay, late_ac_arrival_delay, y.almost_total_delay, y.neg_difference, y.pos_difference
+	HAVING CASE
+		WHEN departure_delay > 0 OR departure_delay > almost_total_delay 
+		THEN SUM(almost_total_delay + pos_difference)
+		WHEN departure_delay < 0 OR departure_delay < almost_total_delay 
+		THEN SUM(almost_total_delay + neg_difference)
+		ELSE 0
+		END > 0)	
+WHERE sched_departure < '12:00:00'
+```
 
 
 ## Findings
