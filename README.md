@@ -125,7 +125,7 @@ SELECT  COUNT(*) AS total_flights,
 FROM delay
 ```
 
-### 8) Of the delayed flights, what percentage were attributed to late_ac_delays or carrier_delays for morning and afternoon departures
+### 8) Of the flights that departed late, what percentage were attributed to late_ac delays and carrier delays for morning and afternoon departures
 FOR MORNING:
 FOR AFTERNOON: (SHOW TABLES NOT CODE. SHOW CODE ONLY ONCE AND EXPLAIN TO SQITCH THE WHERE CLAUSE TO >= FOR AFTERNOON)
 ```
