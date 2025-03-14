@@ -86,7 +86,7 @@ FROM (SELECT 	origin,
 GROUP BY origin, mdn_dept_dly, mdn_taxi, mdn_carrier_dly, mdn_weather_dly, mdn_atc_dly, mdn_security_dly, mdn_late_ac_dly
 ORDER BY total_mdn_dly DESC)
 ```
-### 6) What day of the week saw the longest total_delays?
+### 6) What day of the week saw the longest delays?
 ```
 SELECT day_of_week, SUM(total_delay) AS total_delay_time
 FROM (SELECT TO_CHAR(date, 'DAY') AS day_of_week,
@@ -165,6 +165,8 @@ WHERE sched_departure < '12:00:00'
 ## Findings - prerequisit for understanding reccomendations
 - Most median delayed base is PHL
 - There are signficantly more departures in the afternoon than the morning
+- Out of the delayed flights in the morning, most are attributed to carrier delays
+But for delayed flights in the afternoon, the delays are heavily swayed towards late aircraft arrivals (Figure 8)
 
 
 ## RECCOMENDATIONS
@@ -172,3 +174,11 @@ WHERE sched_departure < '12:00:00'
 - Focus on on-time departures in the morning so the planes can operate on-time for the later departures then shift priority to customer experience during times when there are the most customers.
 
 - A/B testing using PHL base as the experimental group, the base that stands to improve the most from delays (figure 5)
+
+
+EXTRA 
+Are late_ac_delays more prevalent in the second half of the day? YES
+Are carrier_delays more prevalent in the first half of the day? YES
+If both are true, AA should implement a priority shift tactic depending on the time of day. 
+
+
