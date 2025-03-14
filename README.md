@@ -5,7 +5,7 @@ An analysis of American Airlines' departure statistics using PostgreSQL to deter
 
 
 ## Exploratory Analysis
-### How many planes did AA operate each year?
+### 1) How many planes did AA operate each year?
 ```
 SELECT 
 	EXTRACT(YEAR FROM date) AS year, 
@@ -15,7 +15,7 @@ FROM delay
 GROUP BY EXTRACT(YEAR FROM date)
 ORDER BY YEAR
 ```
-### Airports ranked from quickest to slowest average taxi time
+### 2) Airports ranked from quickest to slowest average taxi time
 ```
 SELECT origin, ROUND(AVG(taxi_out_time),2) AS avg_taxi,
 	RANK() OVER (ORDER BY ROUND(AVG(taxi_out_time),2)) AS RANK
@@ -23,7 +23,7 @@ FROM delay
 GROUP BY origin
 ORDER BY avg_taxi
 ```
-### What was the maximum delay for each type of delay?
+### 3) What was the maximum delay for each type of delay?
 ```
 SELECT 	
 		MAX(taxi_out_time) AS max_taxi,
@@ -32,8 +32,86 @@ SELECT
 		MAX(national_aviation_sys_delay) max_atc_dly,
 		MAX(security_delay) AS max_security_dly,
 		MAX(late_ac_arrival_delay) AS max_late_ac_dly
-FROM dela
+FROM delay
 ```
+## Detailed Analysis
+1) What were the top 5 most delayed flights?
+```
+SELECT id, origin, departure_delay, carrier_delay, weather_delay, national_aviation_sys_delay, security_delay, late_ac_arrival_delay, 	
+	CASE
+		WHEN departure_delay > 0 OR departure_delay > almost_total_delay 
+		THEN SUM(almost_total_delay + pos_difference)
+		WHEN departure_delay < 0 OR departure_delay < almost_total_delay 
+		THEN SUM(almost_total_delay + neg_difference)
+		ELSE 0
+	END AS total_delay
+FROM (SELECT *, COALESCE(SUM(almost_total_delay - departure_delay) FILTER(WHERE departure_delay >0), departure_delay) AS neg_difference,
+		COALESCE(ABS(SUM(almost_total_delay - departure_delay) FILTER(WHERE departure_delay >0)), ABS(departure_delay)) AS pos_difference						
+	FROM 		(SELECT id, origin, departure_delay, carrier_delay, weather_delay, national_aviation_sys_delay, security_delay, late_ac_arrival_delay,
+			SUM (carrier_delay +
+				weather_delay +
+				national_aviation_sys_delay +
+				security_delay +
+				late_ac_arrival_delay) AS almost_total_delay
+			FROM delay
+			GROUP BY id) AS z
+	 GROUP BY id, origin, departure_delay, carrier_delay, weather_delay, national_aviation_sys_delay, security_delay, late_ac_arrival_delay, 
+	   			z.almost_total_delay) AS y
+GROUP BY id, origin, departure_delay, carrier_delay, weather_delay, national_aviation_sys_delay, security_delay, late_ac_arrival_delay, y.almost_total_delay, y.neg_difference, y.pos_difference
+ORDER BY total_delay DESC, late_ac_arrival_delay DESC
+LIMIT 5
+```
+2) Median delay length for each delay category per base for only situations where there was a delay. Bases ranked from most delayed to least delayed.
+```
+SELECT RANK() OVER (ORDER BY total_mdn_dly DESC) AS top_mdn_dlyd_base_rank, * 
+FROM (SELECT 	origin, 
+		SUM(mdn_dept_dly+mdn_taxi+mdn_carrier_dly+mdn_weather_dly+mdn_atc_dly+mdn_security_dly+mdn_late_ac_dly) AS total_mdn_dly,
+		mdn_dept_dly,
+		mdn_taxi,
+		mdn_carrier_dly,
+		mdn_weather_dly,
+		mdn_atc_dly,
+		mdn_security_dly,
+		mdn_late_ac_dly	
+	FROM 	(SELECT  origin,
+			PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY departure_delay) FILTER(WHERE departure_delay > 0) AS mdn_dept_dly,
+	   		PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY taxi_out_time) FILTER(WHERE taxi_out_time > 0) AS mdn_taxi,
+			PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY carrier_delay) FILTER(WHERE carrier_delay <> 0) AS mdn_carrier_dly,
+			PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY weather_delay) FILTER(WHERE weather_delay <> 0) AS mdn_weather_dly,
+			PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY national_aviation_sys_delay) FILTER(WHERE national_aviation_sys_delay <> 0) AS mdn_atc_dly,
+			PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY security_delay) FILTER(WHERE security_delay <> 0) AS mdn_security_dly,
+			PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY late_ac_arrival_delay) FILTER(WHERE late_ac_arrival_delay <> 0) AS mdn_late_ac_dly
+		FROM delay
+		GROUP BY origin)
+GROUP BY origin, mdn_dept_dly, mdn_taxi, mdn_carrier_dly, mdn_weather_dly, mdn_atc_dly, mdn_security_dly, mdn_late_ac_dly
+ORDER BY total_mdn_dly DESC)
+```
+3) What day of the week saw the longest total_delays?
+```
+SELECT day_of_week, SUM(total_delay) AS total_delay_time
+FROM (SELECT TO_CHAR(date, 'DAY') AS day_of_week,
+		CASE
+			WHEN departure_delay > 0 OR departure_delay > almost_total_delay 
+			THEN SUM(almost_total_delay + pos_difference)
+			WHEN departure_delay < 0 OR departure_delay < almost_total_delay 
+			THEN SUM(almost_total_delay + neg_difference)
+			ELSE 0
+		END AS total_delay
+	FROM (SELECT *, COALESCE(SUM(almost_total_delay - departure_delay) FILTER(WHERE departure_delay >0), departure_delay) AS neg_difference,
+			COALESCE(ABS(SUM(almost_total_delay - departure_delay) FILTER(WHERE departure_delay >0)), ABS(departure_delay)) AS pos_difference					
+		FROM (SELECT date, id, origin, departure_delay, carrier_delay, weather_delay, national_aviation_sys_delay, security_delay, late_ac_arrival_delay,
+				SUM (carrier_delay +
+					weather_delay +
+					national_aviation_sys_delay +
+					security_delay +
+					late_ac_arrival_delay) AS almost_total_delay
+			FROM delay
+			GROUP BY id) AS z
+	GROUP BY date, id, origin, departure_delay, carrier_delay, weather_delay, national_aviation_sys_delay, security_delay, late_ac_arrival_delay, z.almost_total_delay) AS y
+	GROUP BY day_of_week, id, origin, departure_delay, carrier_delay, weather_delay, national_aviation_sys_delay, security_delay, late_ac_arrival_delay, y.almost_total_delay, y.neg_difference, y.pos_difference)
+GROUP BY day_of_week
+ORDER BY total_delay_time DESC
+
 
 ## Findings
 ### Average Delay by Base
