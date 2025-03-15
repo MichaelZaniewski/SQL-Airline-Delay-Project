@@ -2,7 +2,7 @@
 An analysis of American Airlines' departure statistics using PostgreSQL to determine what and how the airline can optimize to achieve more on-time departures while balancing an enhanced customer experience.
 
 ## INTRODUCTION
-The project is focused on American's nine largest hubs: DFW, CLT, MIA, PHX, ORD, PHL, LAX, DCA, and JFK
+This project is focused on American's nine largest hubs: DFW, CLT, MIA, PHX, ORD, PHL, LAX, DCA, and JFK
 
 ## Dataset
 The dataset for this project was gathered from the [Bureau of Transportation Statistics](https://www.transtats.bts.gov/ontime/departures.aspx) for all AA departure metrics in years 2022-2024. Statistics are generated per origin airport. Compiled datasets are uploaded to the repository.
@@ -26,14 +26,17 @@ FROM delay
 GROUP BY EXTRACT(YEAR FROM date)
 ORDER BY YEAR
 ```
-### 2) Airports ranked from quickest to slowest average taxi time
-![Image](https://github.com/user-attachments/assets/ea83c6ec-cba2-4a35-aa4a-2033036574ea)
+### 2) Airports ranked from most departures to least departures for year 2023. 
+
 ```
-SELECT origin, ROUND(AVG(taxi_out_time),2) AS avg_taxi,
-	RANK() OVER (ORDER BY ROUND(AVG(taxi_out_time),2)) AS RANK
-FROM delay
-GROUP BY origin
-ORDER BY avg_taxi
+SELECT origin, COUNT(*) as total_departures,
+	RANK() OVER (ORDER BY COUNT(*) DESC) as RANK		
+FROM    (SELECT origin, id,
+	EXTRACT(YEAR FROM date) AS year
+	FROM delay)
+WHERE year = '2023'
+GROUP BY year, origin
+ORDER BY total_departures DESC
 ```
 ### 3) What was the maximum delay for each type of delay?
 ![Figure3](https://github.com/user-attachments/assets/65c2495e-f904-4094-8542-d18de3cd35ce)
