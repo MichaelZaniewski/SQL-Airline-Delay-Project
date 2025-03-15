@@ -8,7 +8,7 @@ An analysis of American Airlines' departure statistics using PostgreSQL to deter
 ## INTRODUCTION
 This project is focused on American's nine largest hubs: DFW, CLT, MIA, PHX, ORD, PHL, LAX, DCA, and JFK.
 
-The goal is determine the top causes for departure delays and provide a business reccomendation to reduce those delays in accordance with the Airline's future endeavor of enhancing the customer experience on-board. 
+The goal is determine the top causes for departure delays and provide a business reccomendation to mitigate delays in accordance with the Airline's future endeavor of enhancing the customer experience on-board. 
 
 There are many types of delays, some controllable, some not. Those that are not directly controllable by the airline include weather, ATC, and security issues. Those that are directly controllable include carrier delays (maintinance issues, catering discrepancies, staffing shortages, etc) and late aircraft arrivals, typically due to carrier delay. These are the type of delays that will be primarily focused on.
 
