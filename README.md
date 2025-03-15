@@ -1,7 +1,9 @@
-![Banner](https://github.com/user-attachments/assets/0beb29af-f4ad-4711-b705-2bd8072e2e1d)
+![BannerSkinny](https://github.com/user-attachments/assets/0227b5ef-e000-4477-b5fd-357d38fb2937)
+
 
 # SQL-Airline-Delay-Project
 An analysis of American Airlines' departure statistics using PostgreSQL to determine what and how the airline can optimize to achieve more on-time departures while balancing an enhanced customer experience.
+
 
 ## INTRODUCTION
 This project is focused on American's nine largest hubs: DFW, CLT, MIA, PHX, ORD, PHL, LAX, DCA, and JFK.
@@ -34,6 +36,9 @@ Flights that have been removed can include:
 ## EXPLORATORY ANALYSIS
 ### 1) How many planes did AA operate each year?
 ![Figure1](https://github.com/user-attachments/assets/3593d1cd-d31d-4db6-8076-bd3da590cec7)
+- AWDAW
+- AWdawd
+- ADAWD
 ```
 SELECT 
 	EXTRACT(YEAR FROM date) AS year, 
