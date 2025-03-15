@@ -1,3 +1,5 @@
+![Banner](https://github.com/user-attachments/assets/0beb29af-f4ad-4711-b705-2bd8072e2e1d)
+
 # SQL-Airline-Delay-Project
 An analysis of American Airlines' departure statistics using PostgreSQL to determine what and how the airline can optimize to achieve more on-time departures while balancing an enhanced customer experience.
 
