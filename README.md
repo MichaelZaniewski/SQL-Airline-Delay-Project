@@ -1,10 +1,18 @@
 # SQL-Airline-Delay-Project
-An analysis of American Airlines' departure statistics using PostgreSQL to determine what the airline can optimize to achieve more on-time departures.
+An analysis of American Airlines' departure statistics using PostgreSQL to determine what and how the airline can optimize to achieve more on-time departures while balancing an enhanced customer experience.
 
 ## INTRODUCTION
+The project is focused on American's nine largest hubs: DFW, CLT, MIA, PHX, ORD, PHL, LAX, DCA, and JFK
 
 ## Dataset
-- The dataset for this project was gathered from the [Bureau of Transportation Statistics]([url](https://www.transtats.bts.gov/ontime/departures.aspx)) for all AA departure metrics in years 2022-2024. Statistics are generated per origin airport. Compiled datasets are uploaded to the repository.
+The dataset for this project was gathered from the [Bureau of Transportation Statistics](https://www.transtats.bts.gov/ontime/departures.aspx) for all AA departure metrics in years 2022-2024. Statistics are generated per origin airport. Compiled datasets are uploaded to the repository.
+  
+The analysis is only considering flights that have successfully taken off. All flights with an actual_flight_time = 0 OR taxi_out_time = 0 OR tail_number IS NULL have been removed (count of 32074 out of 1.5 million) to consider only the flights that operated under routine conditions. The raw datasets in the repository will still include these flights.
+
+Flights that have been removed can include:
+- Cancelled flights
+- Diverted flights
+- Abnormalities attributed to data input
 
 ## EXPLORATORY ANALYSIS
 ### 1) How many planes did AA operate each year?
