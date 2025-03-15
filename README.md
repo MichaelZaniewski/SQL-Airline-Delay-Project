@@ -12,7 +12,7 @@ The goal is determine the top causes for departure delays and provide a business
 
 There are many types of delays, some controllable, some not. Those that are not directly controllable by the airline include weather, ATC, and security issues. Those that are directly controllable include carrier delays (maintinance issues, catering discrepancies, staffing shortages, etc) and late aircraft arrivals, typically due to carrier delay. These are the type of delays that will be primarily focused on.
 
-## Dataset
+## DATASET
 The dataset for this project was gathered from the [Bureau of Transportation Statistics](https://www.transtats.bts.gov/ontime/departures.aspx) for all AA departure metrics in years 2022-2024. Statistics are generated per origin airport. Compiled datasets are uploaded to the repository.
 
 Columns in this dataset include:
@@ -35,11 +35,12 @@ Flights that have been removed can include:
 ## SQL SKILL USED
 - Window functions
 - Aggregations
+- Sub queries
 
 ## EXPLORATORY ANALYSIS
 ### 1) How many planes did AA operate each year?
 ![Figure1](https://github.com/user-attachments/assets/3593d1cd-d31d-4db6-8076-bd3da590cec7)
-- **Functions:** Utilized COUNT() function, DISTINCT clause, and LAG() window function to show changes over time and improve readability
+- **Functions:** Utilized COUNT() function, DISTINCT clause to aggregate a count of total planes. Then, created a LAG() window function to show changes over time and improve readability
 - **Insights Gained:** AA instated 39 planes in 2023 and 17 in 2024 
 ```
 SELECT 
@@ -52,6 +53,9 @@ ORDER BY YEAR
 ```
 ### 2) How many departures from each base did AA operate in 2023? 
 ![Figure2](https://github.com/user-attachments/assets/af14b2fe-0a6c-482f-866f-3c39e10ce529)
+- **Methodology:** Aggregated a year column using EXTRACT() function, COUNT() to see total_departures, allowing viewers to gain a relative understanding of airline presence per airport. Ranked for easy viewing ability. 
+- **Insights Gained:** AA has the largest presence in DFW and the smallest in JFK.  
+
 ```
 SELECT origin, COUNT(*) as total_departures,
 	RANK() OVER (ORDER BY COUNT(*) DESC) as RANK		
