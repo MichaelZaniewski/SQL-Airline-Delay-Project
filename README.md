@@ -13,7 +13,7 @@ The goal is determine the top causes for departure delays and provide a business
 There are many types of delays, some controllable, some not. Those that are not directly controllable by the airline include weather, ATC, and security issues. Those that are directly controllable include carrier delays (maintinance issues, catering discrepancies, staffing shortages, etc) and late aircraft arrivals, typically due to carrier delay. These are the type of delays that will be primarily focused on.
 
 ## DATASET
-The dataset for this project was gathered from the [Bureau of Transportation Statistics](https://www.transtats.bts.gov/ontime/departures.aspx) for all AA departure metrics in years 2022-2024. Statistics are generated per origin airport. Compiled datasets are uploaded to the repository.
+The dataset for this project was gathered from the [Bureau of Transportation Statistics](https://www.transtats.bts.gov/ontime/departures.aspx) for all AA departure metrics in years 2022-2024. Statistics are generated per origin airport. Compiled datasets are uploaded to the repository [here](url).
 
 Columns in this dataset include:
 
@@ -70,7 +70,6 @@ ORDER BY total_departures DESC
 - **Methodology** MAX() function to return information on maximum recorded delay to determine how comparing controllable and uncontrollable delays affect departure dependability
 - **Insights Gained:** The highest recorded delay is attributed to a late aircraft arrival, followed very closely by carrier delay
 - **NOTE**: taxi_time is not denoted as a delay. Every aircraft **has** to have a taxi time, and excess taxi time is recored under a delay category. Regardless, it is still an interesting metric to pull
-
 ```
 SELECT 	
 		MAX(taxi_out_time) AS max_taxi,
@@ -81,11 +80,12 @@ SELECT
 		MAX(late_ac_arrival_delay) AS max_late_ac_dly
 FROM delay
 ```
-
-
 ## DIGGING DEEPER
 ### 4) What were the top 5 most delayed flights?
 ![Figure4](https://github.com/user-attachments/assets/8375620a-68cf-4851-bbd6-109f7aa779b5)
+- **Methodology:** Utilized subqueries, CASE statements along with SUM(), ABS(), FILTER(), and COALESCE() functions to aggregate a total_delay column, accounting for categorically unlisted delays before gate-pushback. Then, applied ORDER BY and LIMIT statements, allowing a viewer to see details of most delayed flights in the dataset
+- **Insights Gained:** The highest recorded delay is attributed to a late aircraft arrival, followed very closely by carrier delay
+  
 ```
 SELECT id, origin, sched_departure, actual_departure, 	
 	CASE
