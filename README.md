@@ -88,9 +88,8 @@ LIMIT 5
 ```
 SELECT RANK() OVER (ORDER BY total_mdn_dly DESC) AS top_mdn_dlyd_base_rank, * 
 FROM (SELECT 	origin, 
-		SUM(mdn_dept_dly+mdn_taxi+mdn_carrier_dly+mdn_weather_dly+mdn_atc_dly+mdn_security_dly+mdn_late_ac_dly) AS total_mdn_dly,
+		SUM(mdn_dept_dly+mdn_carrier_dly+mdn_weather_dly+mdn_atc_dly+mdn_security_dly+mdn_late_ac_dly) AS total_mdn_dly,
 		mdn_dept_dly,
-		mdn_taxi,
 		mdn_carrier_dly,
 		mdn_weather_dly,
 		mdn_atc_dly,
@@ -98,7 +97,6 @@ FROM (SELECT 	origin,
 		mdn_late_ac_dly	
 	FROM 	(SELECT  origin,
 			PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY departure_delay) FILTER(WHERE departure_delay > 0) AS mdn_dept_dly,
-	   		PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY taxi_out_time) FILTER(WHERE taxi_out_time > 0) AS mdn_taxi,
 			PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY carrier_delay) FILTER(WHERE carrier_delay <> 0) AS mdn_carrier_dly,
 			PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY weather_delay) FILTER(WHERE weather_delay <> 0) AS mdn_weather_dly,
 			PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY national_aviation_sys_delay) FILTER(WHERE national_aviation_sys_delay <> 0) AS mdn_atc_dly,
@@ -106,7 +104,7 @@ FROM (SELECT 	origin,
 			PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY late_ac_arrival_delay) FILTER(WHERE late_ac_arrival_delay <> 0) AS mdn_late_ac_dly
 		FROM delay
 		GROUP BY origin)
-GROUP BY origin, mdn_dept_dly, mdn_taxi, mdn_carrier_dly, mdn_weather_dly, mdn_atc_dly, mdn_security_dly, mdn_late_ac_dly
+GROUP BY origin, mdn_dept_dly, mdn_carrier_dly, mdn_weather_dly, mdn_atc_dly, mdn_security_dly, mdn_late_ac_dly
 ORDER BY total_mdn_dly DESC)
 ```
 ### 6) What day of the week saw the longest delays?
