@@ -166,6 +166,8 @@ ORDER BY total_delay_time DESC
 ```
 ### 7) Of total flights, how many left in the morning vs afternoon? What percent of morning and afternoon flights departed on time vs late?
 ![Figure7](https://github.com/user-attachments/assets/7c15d4d4-447b-45d7-a2b9-f61f34a3606f)
+- **Methodology:** Created a subquery CASE statment to categorize `sched_departure` into 'MORNING' and 'AFTERNOON', then COUNT() flights on-time and late and divided by total and GROUP BY `time_of_day` to get percentages per time period. Allows for easy data interpretation of departure statistics 
+- **Insights Gained:** 30.19% of flights depart late in the morning, quickly increasing to 50.44% by the afternoon
 ```
 SELECT time_of_day, 
 		COUNT(*) AS total_flights,
@@ -181,7 +183,6 @@ FROM delay)
 GROUP BY time_of_day 
 ORDER BY total_flights ASC
 ```
-
 ### 8) Of the flights that departed late, what percentage were attributed to late_ac delays and carrier delays for morning and afternoon departures?
 ![Figure8](https://github.com/user-attachments/assets/c46c364e-e4b5-49f8-a643-3b8a79a2f65c)
 ```
