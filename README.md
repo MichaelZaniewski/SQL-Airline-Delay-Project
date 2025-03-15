@@ -10,13 +10,24 @@ There are many types of delays, some controllable, some not. Those that are not 
 
 ## Dataset
 The dataset for this project was gathered from the [Bureau of Transportation Statistics](https://www.transtats.bts.gov/ontime/departures.aspx) for all AA departure metrics in years 2022-2024. Statistics are generated per origin airport. Compiled datasets are uploaded to the repository.
-  
+
+Columns in this dataset include:
+
+|        id       |        date      |  departure_delay            |        
+|   ------------- |   -------------  | ---------------             |
+|   flight_number |    tail_number   |  carrier_delay              |
+|      origin     |    destination   |  weather_delay              |
+| sched_departure | actual_departure | national_aviation_sys_delay |
+| sched_flt_time  | actual_flt_time  | security_delay              |
+| wheels_up_time  |   taxi_out_time  | late_ac_arrival_delay       |
+
 The analysis is only considering flights that have successfully taken off. All flights with an actual_flight_time = 0 OR taxi_out_time = 0 OR tail_number IS NULL have been removed (count of 32074 out of 1.5 million) to consider only the flights that operated under routine conditions. The raw datasets in the repository will still include these flights.
 
 Flights that have been removed can include:
 - Cancelled flights
 - Diverted flights
 - Abnormalities attributed to data input
+
 
 ## EXPLORATORY ANALYSIS
 ### 1) How many planes did AA operate each year?
