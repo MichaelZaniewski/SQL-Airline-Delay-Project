@@ -82,7 +82,8 @@ FROM delay
 ```
 ## DIGGING DEEPER
 ### 4) What were the top 5 most delayed flights?
-![Figure4](https://github.com/user-attachments/assets/8375620a-68cf-4851-bbd6-109f7aa779b5)
+![Image](https://github.com/user-attachments/assets/025a1219-b698-4f95-a34e-c9b2d335cd8a)
+
 - **Methodology:** Utilized subqueries, CASE statements along with SUM(), ABS(), FILTER(), and COALESCE() functions to aggregate a total_delay column, accounting for categorically unlisted delays before gate-pushback. Then, applied ORDER BY and LIMIT statements, allowing a viewer to see details of most delayed flights in the dataset
 - **Insights Gained:** The highest recorded delay is attributed to a late aircraft arrival, followed very closely by carrier delay
   
@@ -112,6 +113,7 @@ LIMIT 5
 ```
 ### 5) What was the median delay length for each delay category per base for only situations where there was a delay? Bases are ranked from most to least delayed.
 ![Figure5](https://github.com/user-attachments/assets/00b29b96-4ffd-43d5-9008-7a9e35e774d9)
+
 ```
 SELECT RANK() OVER (ORDER BY total_mdn_dly DESC) AS top_mdn_dlyd_base_rank, * 
 FROM (SELECT 	origin, 
