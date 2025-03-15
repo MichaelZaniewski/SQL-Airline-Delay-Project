@@ -67,9 +67,9 @@ ORDER BY total_departures DESC
 ```
 ### 3) What was the maximum time for each category of delay?
 ![Figure3](https://github.com/user-attachments/assets/65c2495e-f904-4094-8542-d18de3cd35ce)
-- **Methodology** MAX() function to return information on maximum recorded delay to determine how comparing controllable and uncontrollable delays affect departure dependability
+- **Methodology:** MAX() function to return information on maximum recorded delay to determine how comparing controllable and uncontrollable delays affect departure dependability
 - **Insights Gained:** The highest recorded delay is attributed to a late aircraft arrival, followed very closely by carrier delay
-- **NOTE**: taxi_time is not denoted as a delay. Every aircraft **has** to have a taxi time, and excess taxi time is recored under a delay category. Regardless, it is still an interesting metric to pull
+- **NOTE:** taxi_time is not denoted as a delay. Every aircraft **has** to have a taxi time, and excess taxi time is recored under a delay category. Regardless, it is still an interesting metric to pull
 ```
 SELECT 	
 		MAX(taxi_out_time) AS max_taxi,
@@ -83,12 +83,10 @@ FROM delay
 ## DIGGING DEEPER
 ### 4) What were the top 5 most delayed flights?
 ![Image](https://github.com/user-attachments/assets/025a1219-b698-4f95-a34e-c9b2d335cd8a)
-
 - **Methodology:** Utilized subqueries, CASE statements along with SUM(), ABS(), FILTER(), and COALESCE() functions to aggregate a total_delay column, accounting for categorically unlisted delays before gate-pushback. Then, applied ORDER BY and LIMIT statements, allowing a viewer to see details of most delayed flights in the dataset
 - **Insights Gained:** The highest recorded delay is attributed to a late aircraft arrival, followed very closely by carrier delay
-  
 ```
-SELECT id, origin, sched_departure, actual_departure, 	
+SELECT date, origin, sched_departure, actual_departure, departure_delay, carrier_delay, weather_delay, national_aviation_sys_delay, security_delay, late_ac_arrival_delay, 
 	CASE
 		WHEN departure_delay > 0 OR departure_delay > almost_total_delay 
 		THEN SUM(almost_total_delay + pos_difference)
@@ -98,7 +96,7 @@ SELECT id, origin, sched_departure, actual_departure,
 	END AS total_delay
 FROM (SELECT *, COALESCE(SUM(almost_total_delay - departure_delay) FILTER(WHERE departure_delay >0), departure_delay) AS neg_difference,
 		COALESCE(ABS(SUM(almost_total_delay - departure_delay) FILTER(WHERE departure_delay >0)), ABS(departure_delay)) AS pos_difference		
-	FROM 		(SELECT id, origin, sched_departure, actual_departure, departure_delay, carrier_delay, weather_delay, national_aviation_sys_delay, security_delay, late_ac_arrival_delay,
+	FROM 		(SELECT id, date, origin, sched_departure, actual_departure, departure_delay, carrier_delay, weather_delay, national_aviation_sys_delay, security_delay, late_ac_arrival_delay,
 			SUM (carrier_delay +
 				weather_delay +
 				national_aviation_sys_delay +
@@ -106,14 +104,15 @@ FROM (SELECT *, COALESCE(SUM(almost_total_delay - departure_delay) FILTER(WHERE 
 				late_ac_arrival_delay) AS almost_total_delay
 			FROM delay
 			GROUP BY id) AS z
-	 GROUP BY id, origin, sched_departure, actual_departure, departure_delay, carrier_delay, weather_delay, national_aviation_sys_delay, security_delay, late_ac_arrival_delay, z.almost_total_delay) AS y
-GROUP BY id, origin, sched_departure, actual_departure, departure_delay, y.late_ac_arrival_delay, y.almost_total_delay, y.neg_difference, y.pos_difference
+	 GROUP BY id, date, origin, sched_departure, actual_departure, departure_delay, carrier_delay, weather_delay, national_aviation_sys_delay, security_delay, late_ac_arrival_delay, z.almost_total_delay) AS y
+GROUP BY date, origin, sched_departure, actual_departure, departure_delay, departure_delay, carrier_delay, weather_delay, national_aviation_sys_delay, security_delay, late_ac_arrival_delay, y.late_ac_arrival_delay, y.almost_total_delay, y.neg_difference, y.pos_difference
 ORDER BY total_delay DESC, late_ac_arrival_delay DESC
 LIMIT 5
 ```
 ### 5) What was the median delay length for each delay category per base for only situations where there was a delay? Bases are ranked from most to least delayed.
 ![Figure5](https://github.com/user-attachments/assets/00b29b96-4ffd-43d5-9008-7a9e35e774d9)
-
+- **Methodology:** PERCENTILE_CONT() function to aggregate the median using FILTER to remove zero values to ensure accurate and insightful data is returned
+- **Insights Gained:** Most bases, with the exceptions of PHL and LAX, see the highest median delays attributed to late aicraft arrivals
 ```
 SELECT RANK() OVER (ORDER BY total_mdn_dly DESC) AS top_mdn_dlyd_base_rank, * 
 FROM (SELECT 	origin, 
