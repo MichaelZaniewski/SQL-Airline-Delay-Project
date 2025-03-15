@@ -30,7 +30,7 @@ FROM delay
 GROUP BY EXTRACT(YEAR FROM date)
 ORDER BY YEAR
 ```
-### 2) Airports ranked from most departures to least departures for year 2023. 
+### 2) How many departures from each base did AA operate in 2023? 
 ![Figure2](https://github.com/user-attachments/assets/af14b2fe-0a6c-482f-866f-3c39e10ce529)
 ```
 SELECT origin, COUNT(*) as total_departures,
@@ -83,8 +83,8 @@ GROUP BY id, origin, sched_departure, actual_departure, departure_delay, y.late_
 ORDER BY total_delay DESC, late_ac_arrival_delay DESC
 LIMIT 5
 ```
-### 5) Median delay length for each delay category per base for only situations where there was a delay. Bases ranked from most delayed to least delayed.
-![Figure5](https://github.com/user-attachments/assets/51dabd0a-8901-4240-af39-4ae173ed23cd)
+### 5) What was the median delay length for each delay category per base for only situations where there was a delay? Bases are ranked from most to least delayed.
+![Figure5](https://github.com/user-attachments/assets/00b29b96-4ffd-43d5-9008-7a9e35e774d9)
 ```
 SELECT RANK() OVER (ORDER BY total_mdn_dly DESC) AS top_mdn_dlyd_base_rank, * 
 FROM (SELECT 	origin, 
@@ -152,7 +152,7 @@ GROUP BY time_of_day
 ORDER BY total_flights ASC
 ```
 
-### 8) Of the flights that departed late, what percentage were attributed to late_ac delays and carrier delays for morning and afternoon departures
+### 8) Of the flights that departed late, what percentage were attributed to late_ac delays and carrier delays for morning and afternoon departures?
 ![Figure8](https://github.com/user-attachments/assets/c46c364e-e4b5-49f8-a643-3b8a79a2f65c)
 ```
 SELECT time_of_day, 
