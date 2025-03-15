@@ -54,8 +54,7 @@ ORDER BY YEAR
 ### 2) How many departures from each base did AA operate in 2023? 
 ![Figure2](https://github.com/user-attachments/assets/af14b2fe-0a6c-482f-866f-3c39e10ce529)
 - **Methodology:** Aggregated a year column using EXTRACT() function, COUNT() to see total_departures, allowing viewers to gain a relative understanding of airline presence per airport. Ranked for easy viewing ability. 
-- **Insights Gained:** AA has the largest presence in DFW and the smallest in JFK.  
-
+- **Insights Gained:** AA has the largest presence in DFW by far, and the smallest in JFK.  
 ```
 SELECT origin, COUNT(*) as total_departures,
 	RANK() OVER (ORDER BY COUNT(*) DESC) as RANK		
@@ -68,6 +67,10 @@ ORDER BY total_departures DESC
 ```
 ### 3) What was the maximum time for each category of delay?
 ![Figure3](https://github.com/user-attachments/assets/65c2495e-f904-4094-8542-d18de3cd35ce)
+- **Methodology** MAX() function to return information on maximum recorded delay to determine how comparing controllable and uncontrollable delays affect departure dependability
+- **Insights Gained:** The highest recorded delay is attributed to a late aircraft arrival, followed very closely by carrier delay
+- **NOTE**: taxi_time is not denoted as a delay. Every aircraft **has** to have a taxi time, and excess taxi time is recored under a delay category. Regardless, it is still an interesting metric to pull
+
 ```
 SELECT 	
 		MAX(taxi_out_time) AS max_taxi,
@@ -78,7 +81,7 @@ SELECT
 		MAX(late_ac_arrival_delay) AS max_late_ac_dly
 FROM delay
 ```
-- Note that taxi_time is not denoted as a delay because every aircraft **has** to have a taxi time, and excess taxi time is always recored under a delay category. Regardless, it is still an interesting metric to pull.
+
 
 ## DIGGING DEEPER
 ### 4) What were the top 5 most delayed flights?
