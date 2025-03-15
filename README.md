@@ -4,7 +4,7 @@ An analysis of American Airlines' departure statistics using PostgreSQL to deter
 ## INTRODUCTION
 
 ## Dataset
-- The data for this project was gathered from 
+- The dataset for this project was gathered from the [Bureau of Transportation Statistics]([url](https://www.transtats.bts.gov/ontime/departures.aspx)) for all AA departure metrics in years 2022-2024. Statistics are generated per origin airport. Compiled datasets are uploaded to the repository.
 
 ## EXPLORATORY ANALYSIS
 ### 1) How many planes did AA operate each year?
