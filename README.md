@@ -25,9 +25,9 @@ Columns in this dataset include:
 | sched_flt_time  | actual_flt_time  | security_delay              |
 | wheels_up_time  |   taxi_out_time  | late_ac_arrival_delay       |
 
-The analysis is only considering flights that have successfully taken off. All flights with an `actual_flight_time = 0` OR `taxi_out_time = 0` OR `tail_number IS NULL` have been removed (count of 32074 out of 1.5 million) to consider only the flights that operated under routine conditions. The raw datasets in the repository will still include these flights.
+The analysis is only considering flights that have successfully taken off. All flights with an `actual_flight_time = 0` OR `taxi_out_time = 0` OR `tail_number IS NULL` have been removed (count of 32074 out of 1.5 million) to consider only the flights that operated under routine conditions. The .CSVs in the repository will still include these flights.
 
-Flights that have been removed can include:
+Flights that have been removed include:
 - Cancelled flights
 - Diverted flights
 - Abnormalities attributed to data input
@@ -185,9 +185,9 @@ FROM delay)
 GROUP BY time_of_day 
 ORDER BY total_flights ASC
 ```
-### 8) Of the flights that departed late, what percentage were attributed to late_ac delays and carrier delays for morning and afternoon departures?
+### 8) Of the flights that departed late, what percentage were mostly attributed to late_ac delays and carrier delays for morning and afternoon departures?
 ![Figure8](https://github.com/user-attachments/assets/c46c364e-e4b5-49f8-a643-3b8a79a2f65c)
-- **Methodology:** Calling back the same CASE statement subquery, we take the percentage of the COUNT of flights 
+- **Methodology:** Calling back the same subquery, COUNT rows where either carrier_delay or late_ac_arrival_delay are greater and divide by total delayed flights and use TO_CHAR TO conver to percentage to achieve 
 - **Insights Gained:** Digging deeper into percentages of controllable departure metrics, AA struggles most with carrier delays in the mornings and late aircraft arrivals in the afternoon. These numbers insiuate that early carrier delays play a part in creating late afternoon arrivals as the plane attempts to continues its routes through the day.
 ```
 SELECT time_of_day, 
