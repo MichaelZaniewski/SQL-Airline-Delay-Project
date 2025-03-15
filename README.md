@@ -2,7 +2,10 @@
 An analysis of American Airlines' departure statistics using PostgreSQL to determine what and how the airline can optimize to achieve more on-time departures while balancing an enhanced customer experience.
 
 ## INTRODUCTION
-This project is focused on American's nine largest hubs: DFW, CLT, MIA, PHX, ORD, PHL, LAX, DCA, and JFK
+This project is focused on American's nine largest hubs: DFW, CLT, MIA, PHX, ORD, PHL, LAX, DCA, and JFK.
+
+The goal is determine the top causes for departure delays and provide a business reccomendation to reduce those delays in accordance with the Airline's future endeavor of enhancing the customer experience on-board. There are many types of delays, some controllable, some not. Those that are directly controllable by the airline include carrier delays (maintinance issues, catering discrepancies, staffing shortages, etc) and late aircraft arrivals. Those delays not directly controllable include weather, ATC, and security issues. 
+
 
 ## Dataset
 The dataset for this project was gathered from the [Bureau of Transportation Statistics](https://www.transtats.bts.gov/ontime/departures.aspx) for all AA departure metrics in years 2022-2024. Statistics are generated per origin airport. Compiled datasets are uploaded to the repository.
