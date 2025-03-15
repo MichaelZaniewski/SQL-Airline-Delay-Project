@@ -42,7 +42,7 @@ WHERE year = '2023'
 GROUP BY year, origin
 ORDER BY total_departures DESC
 ```
-### 3) What was the maximum delay for each type of delay?
+### 3) What was the maximum time for each category of delay?
 ![Figure3](https://github.com/user-attachments/assets/65c2495e-f904-4094-8542-d18de3cd35ce)
 ```
 SELECT 	
@@ -54,6 +54,8 @@ SELECT
 		MAX(late_ac_arrival_delay) AS max_late_ac_dly
 FROM delay
 ```
+- Note that taxi_time is not denoted as a delay because every aircraft **has** to have a taxi time, and excess taxi time is always recored under a delay category. Regardless, it is still an interesting metric to pull.
+
 ## DIGGING DEEPER
 ### 4) What were the top 5 most delayed flights?
 ![Figure4](https://github.com/user-attachments/assets/8375620a-68cf-4851-bbd6-109f7aa779b5)
