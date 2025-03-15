@@ -173,15 +173,18 @@ ORDER BY count_delayed_departures ASC
 
 
 ## Findings - prerequisit for understanding reccomendations
-- Most median delayed base is PHL
-- There are signficantly more departures in the afternoon than the morning
-- Out of the delayed flights in the morning, most are attributed to carrier delays
-But for delayed flights in the afternoon, the delays are heavily swayed towards late aircraft arrivals (Figure 8)
+- 
 
-- Late ac arrivals are the #1 cause of late departures (figure 5)
-  
+
+- Friday saw the highest total delay times with Tueday being the lowest (Figure 6)
+- There are signficantly more departures in the afternoon than the morning (Figure 7)
+- 31.19% of flights in the morning were delayed, while 50.44% in the afternoon were delayed (Figure 7)
+- For every flight that departed late in the morning, there were 2.7 flights departing late in the afternoon (extrapolated from figure 8)
+- Out of the delayed flights in the morning, most are attributed to carrier delays, while delayed flights in the afternoon are heavily swayed towards late aircraft arrivals (Figure 8)
+- Late ac arrivals are the #1 cause for controllable late departues and have the highest maximum delay length of any delay, being the most detrimental advresary to on-time goals (Figure 5 and 3)
+
 ## RECCOMENDATIONS
-- Being that late_ac_arrivals are the #1 cause of delayed flights, AA should focus on
+- Being that late_ac_arrivals are the #1 cause of delayed flights , AA should focus on
 - Focus on on-time departures in the morning so the planes can operate on-time for the later departures then shift priority to customer experience during times when there are the most customers.
 
 - A/B testing using PHL base as the experimental group, the base that stands to improve the most from delays (figure 5)
