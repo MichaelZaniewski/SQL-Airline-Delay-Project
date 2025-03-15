@@ -39,8 +39,8 @@ Flights that have been removed can include:
 ## EXPLORATORY ANALYSIS
 ### 1) How many planes did AA operate each year?
 ![Figure1](https://github.com/user-attachments/assets/3593d1cd-d31d-4db6-8076-bd3da590cec7)
-- **Functions:** Utilized COUNT() function, DISTINCT clause, and a LAG() window function to show changes over time and improve readability
-- **Insights Gained:** AA instated 37 planes in 22 and 
+- **Functions:** Utilized COUNT() function, DISTINCT clause, and LAG() window function to show changes over time and improve readability
+- **Insights Gained:** AA instated 39 planes in 2023 and 17 in 2024 
 ```
 SELECT 
 	EXTRACT(YEAR FROM date) AS year, 
