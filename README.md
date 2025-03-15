@@ -37,6 +37,8 @@ Flights that have been removed can include:
 - Aggregations
 - Sub queries
 
+Functions - TO_CHAR, ABS, FILTER
+
 ## EXPLORATORY ANALYSIS
 ### 1) How many planes did AA operate each year?
 ![Figure1](https://github.com/user-attachments/assets/3593d1cd-d31d-4db6-8076-bd3da590cec7)
@@ -185,6 +187,8 @@ ORDER BY total_flights ASC
 ```
 ### 8) Of the flights that departed late, what percentage were attributed to late_ac delays and carrier delays for morning and afternoon departures?
 ![Figure8](https://github.com/user-attachments/assets/c46c364e-e4b5-49f8-a643-3b8a79a2f65c)
+- **Methodology:** Calling back the same CASE statement subquery, we take the percentage of the COUNT of flights 
+- **Insights Gained:** Digging deeper into percentages of controllable departure metrics, AA struggles most with carrier delays in the mornings and late aircraft arrivals in the afternoon. These numbers insiuate that early carrier delays play a part in creating late afternoon arrivals as the plane attempts to continues its routes through the day.
 ```
 SELECT time_of_day, 
 	COUNT(*) FILTER(WHERE departure_delay > 0) AS count_delayed_departures,
