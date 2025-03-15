@@ -137,8 +137,8 @@ ORDER BY total_mdn_dly DESC)
 ```
 ### 6) What day of the week saw the longest delays?
 ![Figure6](https://github.com/user-attachments/assets/d6b3171c-ed14-4322-92e2-6f7e12be7e66)
-- **Methodology:** Querying off the aggregated `total_delay` column generated previously, sum the total_delays and EXTRACT and GROUP BY `day of week`
-- **Insights Gained:**
+- **Methodology:** Querying off the aggregated `total_delay` column generated previously, use TO_CHAR to compose `day of week` and GROUP BY it to illustrate which days of the week saw the longest delays
+- **Insights Gained:** Friday saw the longest total delays while tuesday saw the least
 ```
 SELECT day_of_week, SUM(total_delay) AS total_delay_time
 FROM (SELECT TO_CHAR(date, 'DAY') AS day_of_week,
