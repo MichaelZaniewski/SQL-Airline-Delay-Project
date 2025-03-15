@@ -27,7 +27,7 @@ GROUP BY EXTRACT(YEAR FROM date)
 ORDER BY YEAR
 ```
 ### 2) Airports ranked from most departures to least departures for year 2023. 
-![Figure2](https://github.com/user-attachments/assets/8e68748e-25ac-48a2-a30c-5368639e1a02)
+![Figure2](https://github.com/user-attachments/assets/af14b2fe-0a6c-482f-866f-3c39e10ce529)
 ```
 SELECT origin, COUNT(*) as total_departures,
 	RANK() OVER (ORDER BY COUNT(*) DESC) as RANK		
