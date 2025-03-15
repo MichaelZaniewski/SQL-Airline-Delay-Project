@@ -25,7 +25,7 @@ Columns in this dataset include:
 | sched_flt_time  | actual_flt_time  | security_delay              |
 | wheels_up_time  |   taxi_out_time  | late_ac_arrival_delay       |
 
-The analysis is only considering flights that have successfully taken off. All flights with an actual_flight_time = 0 OR taxi_out_time = 0 OR tail_number IS NULL have been removed (count of 32074 out of 1.5 million) to consider only the flights that operated under routine conditions. The raw datasets in the repository will still include these flights.
+The analysis is only considering flights that have successfully taken off. All flights with an `actual_flight_time = 0` OR `taxi_out_time = 0` OR `tail_number IS NULL` have been removed (count of 32074 out of 1.5 million) to consider only the flights that operated under routine conditions. The raw datasets in the repository will still include these flights.
 
 Flights that have been removed can include:
 - Cancelled flights
@@ -69,7 +69,7 @@ ORDER BY total_departures DESC
 ![Figure3](https://github.com/user-attachments/assets/65c2495e-f904-4094-8542-d18de3cd35ce)
 - **Methodology:** MAX() function to return information on maximum recorded delay to determine how comparing controllable and uncontrollable delays affect departure dependability
 - **Insights Gained:** The highest recorded delay is attributed to a late aircraft arrival, followed very closely by carrier delay
-- **NOTE:** taxi_time is not denoted as a delay. Every aircraft **has** to have a taxi time, and excess taxi time is recored under a delay category. Regardless, it is still an interesting metric to pull
+- **NOTE:** `taxi_time` is not denoted as a delay. Every aircraft **has** to have a taxi time, and excess taxi time is recored under a delay category. Regardless, it is still an interesting metric to pull
 ```
 SELECT 	
 		MAX(taxi_out_time) AS max_taxi,
@@ -111,7 +111,7 @@ LIMIT 5
 ```
 ### 5) What was the median delay length for each delay category per base for only situations where there was a delay? Bases are ranked from most to least delayed.
 ![Figure5](https://github.com/user-attachments/assets/00b29b96-4ffd-43d5-9008-7a9e35e774d9)
-- **Methodology:** PERCENTILE_CONT() function to aggregate the median using FILTER to remove zero values to ensure accurate and insightful data is returned
+- **Methodology:** PERCENTILE_CONT() function to aggregate the median while using FILTER to remove zero values, ensure accurate and insightful data is returned
 - **Insights Gained:** Most bases, with the exceptions of PHL and LAX, see the highest median delays attributed to late aicraft arrivals
 ```
 SELECT RANK() OVER (ORDER BY total_mdn_dly DESC) AS top_mdn_dlyd_base_rank, * 
@@ -137,6 +137,8 @@ ORDER BY total_mdn_dly DESC)
 ```
 ### 6) What day of the week saw the longest delays?
 ![Figure6](https://github.com/user-attachments/assets/d6b3171c-ed14-4322-92e2-6f7e12be7e66)
+- **Methodology:** Querying off the aggregated `total_delay` column generated previously, sum the total_delays and EXTRACT and GROUP BY `day of week`
+- **Insights Gained:**
 ```
 SELECT day_of_week, SUM(total_delay) AS total_delay_time
 FROM (SELECT TO_CHAR(date, 'DAY') AS day_of_week,
