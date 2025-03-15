@@ -32,13 +32,15 @@ Flights that have been removed can include:
 - Diverted flights
 - Abnormalities attributed to data input
 
+## SQL SKILL USED
+- Window functions
+- Aggregations
 
 ## EXPLORATORY ANALYSIS
 ### 1) How many planes did AA operate each year?
 ![Figure1](https://github.com/user-attachments/assets/3593d1cd-d31d-4db6-8076-bd3da590cec7)
-- AWDAW
-- AWdawd
-- ADAWD
+- **Functions:** Utilized COUNT() function, DISTINCT clause, and a LAG() window function to show changes over time and improve readability
+- **Insights Gained:** AA instated 37 planes in 22 and 
 ```
 SELECT 
 	EXTRACT(YEAR FROM date) AS year, 
