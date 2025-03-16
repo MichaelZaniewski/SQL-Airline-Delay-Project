@@ -15,6 +15,7 @@ Insights and reccomendatoins are provided on the following key areas:
 
 There are various types of delays, some controllable, some not. Those that are not directly controllable by the airline include weather, ATC, and security issues. Those that are directly controllable include carrier delays (maintinance issues, catering discrepancies, staffing shortages, etc) and late aircraft arrivals. These are the type of delays that will be primarily analyzed.
 
+A long form written 'company mindset' and 'reccomendation' report can be found HERE
 
 ## DATASET
 The dataset for this project was gathered from the [Bureau of Transportation Statistics](https://www.transtats.bts.gov/ontime/departures.aspx) for all AA departure metrics in years 2022-2024. Statistics are generated per origin airport. Compiled datasets are uploaded to the repository [here](url).
@@ -92,7 +93,7 @@ SELECT
 FROM delay
 ```
 ## DIGGING DEEPER
-### 4) What were the top 5 most delayed flights?
+### 4) What were the top 5 most delayed flights and their primary cause?
 ![Image](https://github.com/user-attachments/assets/025a1219-b698-4f95-a34e-c9b2d335cd8a)
 - **Methodology:** Utilized subqueries, CASE statements along with SUM(), ABS(), FILTER(), and COALESCE() functions to aggregate a `total_delay` column, accounting for categorically unlisted delays before gate-pushback. Then, applied ORDER BY and LIMIT statements, allowing a viewer to see details of most delayed flights in the dataset
 - **Insights Gained:** The highest recorded delay is attributed to a late aircraft arrival, followed very closely by carrier delay
@@ -177,7 +178,7 @@ ORDER BY total_delay_time DESC
 ```
 ### 7) Of total flights, how many left in the morning vs afternoon? What percent of morning and afternoon flights departed on time vs late?
 ![Figure7](https://github.com/user-attachments/assets/7c15d4d4-447b-45d7-a2b9-f61f34a3606f)
-- **Methodology:** Created a subquery CASE statment to categorize `sched_departure` into 'MORNING' and 'AFTERNOON', then COUNT() flights on-time and late and divided by total and GROUP BY `time_of_day` to get percentages per time period. Allows for easy data interpretation of departure statistics 
+- **Methodology:** Created a subquery CASE statment to categorize `sched_departure` into 'MORNING' and 'AFTERNOON', then COUNT() flights on-time and late, column division by total, and GROUP BY `time_of_day` to get percentages per time period. Allows for easy data interpretation of departure statistics 
 - **Insights Gained:** 30.19% of flights depart late in the morning, quickly increasing to 50.44% by the afternoon
 ```
 SELECT time_of_day, 
@@ -196,8 +197,8 @@ ORDER BY total_flights ASC
 ```
 ### 8) Of the flights that departed late, what percentage were mostly attributed to late aircraft delays and carrier delays for morning and afternoon departures?
 ![Figure8](https://github.com/user-attachments/assets/c46c364e-e4b5-49f8-a643-3b8a79a2f65c)
-- **Methodology:** Calling back the same subquery, COUNT rows where either carrier_delay or late_ac_arrival_delay are greater and divide by total delayed flights and use TO_CHAR TO conver to percentage to achieve actionable insights on controllable delays
-- **Insights Gained:** Digging deeper into percentages of controllable departure metrics, AA struggles most with carrier delays in the mornings and late aircraft arrivals in the afternoon. These numbers insiuate that early carrier delays play a part in creating late afternoon arrivals as the plane attempts to continues its routes through the day.
+- **Methodology:** Calling back the same subquery, COUNT rows where either `carrier_delay` or `late_ac_arrival_delay` are greater and divide by total delayed flights and use TO_CHAR TO convert to percentage to achieve actionable insights on controllable delays
+- **Insights Gained:** Digging deeper into percentages of controllable departure metrics, AA struggles most with carrier delays in the mornings and late aircraft arrivals in the afternoon. These numbers insiuate that early carrier delays play a part in creating late afternoon arrivals as the plane attempts to continues its route through the day.
 ```
 SELECT time_of_day, 
 	COUNT(*) FILTER(WHERE departure_delay > 0) AS count_delayed_departures,
