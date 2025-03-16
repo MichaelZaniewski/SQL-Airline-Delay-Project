@@ -30,7 +30,10 @@ Columns in this dataset include: **INCLUDE ERD HERE**
 | sched_flt_time  | actual_flt_time  | security_delay              |
 | wheels_up_time  |   taxi_out_time  | late_ac_arrival_delay       |
 
-Prior to beginning the analysis, a variety of checks were conducted for quality control and familiarization with column relationships. The SQL queries used to inspect and perform quality checks can be found HERE (HYPERLINK)
+Prior to beginning the analysis, a variety of checks were conducted for quality control and familiarization with column relationships. 
+
+The SQL queries used to inspect and perform quality checks can be found HERE (HYPERLINK)
+
 ALL THIS NEXT PART WILL GO IN THE SECTION MENTIONED ABOVE
 The analysis is only considering flights that have successfully taken off. All flights with an `actual_flight_time = 0` OR `taxi_out_time = 0` OR `tail_number IS NULL` have been removed (count of 32074 out of 1.5 million) to consider only the flights that operated under routine conditions. The .CSVs in the repository will still include these flights.
 
