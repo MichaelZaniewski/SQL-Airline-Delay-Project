@@ -2,12 +2,11 @@
 
 
 # SQL-Airline-Delay-Project
-An analysis of American Airlines' departure statistics using PostgreSQL to determine what and how the airline can optimize to achieve more on-time departures while balancing an enhanced customer experience.
 
+An analysis of American Airlines' departure statistics to determine what and how the airline can optimize to achieve more on-time departures while balancing an enhanced customer experience.
 
-## INTRODUCTION
-American Airlines is the worlds largest Airline. 
-
+## Background and Overview
+American Airlines, established in 1926, is the worlds largest Airline in terms of quantity of flights and passangers carried daily. 
 This project is focused on American's nine largest hubs: DFW, CLT, MIA, PHX, ORD, PHL, LAX, DCA, and JFK.
 
 The goal is to determine the top causes for departure delays and provide a business reccomendation utilizing actionable insights to mitigate delays in accordance with the airline's future endeavors of enhancing the customer experience on-board. 
@@ -27,6 +26,8 @@ Columns in this dataset include: **INCLUDE ERD HERE**
 | sched_flt_time  | actual_flt_time  | security_delay              |
 | wheels_up_time  |   taxi_out_time  | late_ac_arrival_delay       |
 
+Prior to beginning the analysis, a variety of checks were conducted for quality control and familiarization with column relationships. The SQL queries used to inspect and perform quality checks can be found HERE (HYPERLINK)
+ALL THIS NEXT PART WILL GO IN THE SECTION MENTIONED ABOVE
 The analysis is only considering flights that have successfully taken off. All flights with an `actual_flight_time = 0` OR `taxi_out_time = 0` OR `tail_number IS NULL` have been removed (count of 32074 out of 1.5 million) to consider only the flights that operated under routine conditions. The .CSVs in the repository will still include these flights.
 
 Flights that have been removed include:
@@ -35,7 +36,13 @@ Flights that have been removed include:
 - Abnormalities attributed to data input
 
 
-
+## Executive Summary
+- Friday saw the highest total delay times with Tueday being the lowest (Figure 6)
+- There are signficantly more departures in the afternoon than the morning (Figure 7)
+- 31.19% of flights in the morning were delayed, while 50.44% in the afternoon were delayed (Figure 7)
+- For every flight that departed late in the morning, there were 2.7 flights departing late in the afternoon (extrapolated from figure 8)
+- Out of the delayed flights in the morning, most are attributed to carrier delays, while delayed flights in the afternoon are heavily swayed towards late aircraft arrivals (Figure 8)
+- Late ac arrivals are the #1 cause for controllable late departues and have the highest maximum delay length of any delay, being the most detrimental advresary to on-time goals (Figure 5 and 3)
 
 
 ## EXPLORATORY ANALYSIS
@@ -204,18 +211,6 @@ FROM	(SELECT *,
 GROUP BY time_of_day 
 ORDER BY count_delayed_departures ASC
 ```
-
-
-## Findings - prerequisit for understanding reccomendations
-- 
-
-
-- Friday saw the highest total delay times with Tueday being the lowest (Figure 6)
-- There are signficantly more departures in the afternoon than the morning (Figure 7)
-- 31.19% of flights in the morning were delayed, while 50.44% in the afternoon were delayed (Figure 7)
-- For every flight that departed late in the morning, there were 2.7 flights departing late in the afternoon (extrapolated from figure 8)
-- Out of the delayed flights in the morning, most are attributed to carrier delays, while delayed flights in the afternoon are heavily swayed towards late aircraft arrivals (Figure 8)
-- Late ac arrivals are the #1 cause for controllable late departues and have the highest maximum delay length of any delay, being the most detrimental advresary to on-time goals (Figure 5 and 3)
 
 ## RECCOMENDATIONS
 - Being that late_ac_arrivals are the #1 cause of delayed flights , AA should focus on
