@@ -187,7 +187,7 @@ ORDER BY total_flights ASC
 ```
 ### 8) Of the flights that departed late, what percentage were mostly attributed to late aircraft delays and carrier delays for morning and afternoon departures?
 ![Figure8](https://github.com/user-attachments/assets/c46c364e-e4b5-49f8-a643-3b8a79a2f65c)
-- **Methodology:** Calling back the same subquery, COUNT rows where either carrier_delay or late_ac_arrival_delay are greater and divide by total delayed flights and use TO_CHAR TO conver to percentage to achieve 
+- **Methodology:** Calling back the same subquery, COUNT rows where either carrier_delay or late_ac_arrival_delay are greater and divide by total delayed flights and use TO_CHAR TO conver to percentage to achieve actionable insights on controllable delays
 - **Insights Gained:** Digging deeper into percentages of controllable departure metrics, AA struggles most with carrier delays in the mornings and late aircraft arrivals in the afternoon. These numbers insiuate that early carrier delays play a part in creating late afternoon arrivals as the plane attempts to continues its routes through the day.
 ```
 SELECT time_of_day, 
