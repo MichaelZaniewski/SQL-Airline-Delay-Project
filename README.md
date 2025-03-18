@@ -10,6 +10,7 @@ American Airlines, established in 1926, is the worlds largest Airline in terms o
 The goal is to determine the top causes for departure delays and provide business reccomendations utilizing actionable insights to mitigate delays in accordance with the airline's future endeavors of enhancing the customer experience on-board. 
 
 Insights and reccomendations are provided on the following key areas:
+- Analyzing departure count to determine relative presence at hubs 
 - Matching type of delay to scheduled departure time to test time-of-day influence
 - Median length of delays per category per hub
 - A/B testing on PHL base 
@@ -42,11 +43,17 @@ The dataset for this project was gathered from the [Bureau of Transportation Sta
 Prior to beginning the analysis, a variety of checks were conducted for quality control and familiarization with column relationships. The SQL queries used to inspect, clean, and perform quality checks can be found HERE (HYPERLINK)
 
 ## Executive Summary
+### Overview of findings
+
+
+SQL queries used to extract insights can be found here (HYPERLINK)
+
+
 - Friday saw the highest total delay times with Tueday being the lowest (Figure 6)
 - There are signficantly more departures in the afternoon than the morning (Figure 7)
 - 31.19% of flights in the morning were delayed, while 50.44% in the afternoon were delayed, a ratio of 1:2.7 morning to evening late departures (Figures 7 & 8)
 - Out of the delayed flights in the morning, most are attributed to carrier delays, while delayed flights in the afternoon are heavily swayed towards late aircraft arrivals (Figure 8)
-- Late ac arrivals are the #1 cause for controllable late departues and have the highest maximum delay length of any delay, being the most detrimental advresary to on-time goals (Figure 5 and 3)
+- Late ac arrivals are the #1 cause for controllable late departues and have the highest maximum delay length of any delay, being the most detrimental adversary to on-time goals (Figure 5 and 3)
 
 
 - AA should look to implement a split-priority tactic of ensuring on-time departures in the first half of the operational day, while shifting to enhance cabin appearance in the latter half
@@ -60,10 +67,5 @@ Prior to beginning the analysis, a variety of checks were conducted for quality 
 
 - A/B testing using PHL base as the experimental group, the base that stands to improve the most from delays (figure 5)
 
-
-EXTRA 
-Are late_ac_delays more prevalent in the second half of the day? YES
-Are carrier_delays more prevalent in the first half of the day? YES
-If both are true, AA should implement a priority shift tactic depending on the time of day. 
 
 
