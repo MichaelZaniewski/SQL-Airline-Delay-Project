@@ -38,15 +38,6 @@ Columns in this dataset include: **INCLUDE ERD HERE**
 
 Prior to beginning the analysis, a variety of checks were conducted for quality control and familiarization with column relationships. The SQL queries used to inspect, clean, and perform quality checks can be found HERE (HYPERLINK)
 
-ALL THIS NEXT PART WILL GO IN THE SECTION MENTIONED ABOVE
-The analysis is only considering flights that have successfully taken off. All flights with an `actual_flight_time = 0` OR `taxi_out_time = 0` OR `tail_number IS NULL` have been removed (count of 32074 out of 1.5 million) to consider only the flights that operated under routine conditions. The .CSVs in the repository will still include these flights.
-
-Flights that have been removed include:
-- Cancelled flights
-- Diverted flights
-- Abnormalities attributed to data input
-
-
 ## Executive Summary
 - Friday saw the highest total delay times with Tueday being the lowest (Figure 6)
 - There are signficantly more departures in the afternoon than the morning (Figure 7)
