@@ -28,13 +28,18 @@ The dataset for this project was gathered from the [Bureau of Transportation Sta
 
 Columns in this dataset include: **INCLUDE ERD HERE**
 
-|        id       |        date      |  departure_delay            |        
-|   ------------- |   -------------  | ---------------             |
-|   flight_number |    tail_number   |  carrier_delay              |
-|      origin     |    destination   |  weather_delay              |
-| sched_departure | actual_departure | national_aviation_sys_delay |
-| sched_flt_time  | actual_flt_time  | security_delay              |
-| wheels_up_time  |   taxi_out_time  | late_ac_arrival_delay       |
+|   column name       |     data type     |     column name     | data type           |   
+|  -------------------| ------------------| ------------------- |---------------------|           
+|         id          |     integer       |  actual_flt_time    | time                |
+|       date          |       date        |  departure_delay    | integer             |
+|   flight_number     |character varying  |    wheels_up_time   | time                |
+|    tail_number      | character varying |     taxi_out_time   | integer             |
+|      origin         |character varying  |     carrier_delay   | integer             |
+|   destination       | character varying | weather_delay       |  integer            |
+| scheduled_departure |       time        | national_aviation_sys_delay| integer      |
+| actual_departure    |       time        | security_delay      | integer             |
+| sched_flt_time      |       integer     | late_ac_arrival_delay| integer            |
+
 
 Prior to beginning the analysis, a variety of checks were conducted for quality control and familiarization with column relationships. The SQL queries used to inspect, clean, and perform quality checks can be found HERE (HYPERLINK)
 
