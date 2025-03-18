@@ -23,10 +23,8 @@ Targeted SQL queries used to answer business questions and extract insights can 
 
 A long-form written report can be found HERE (HYPERLINK)
 
-## DATASET
+## Data Structure and Info
 The dataset for this project was gathered from the [Bureau of Transportation Statistics](https://www.transtats.bts.gov/ontime/departures.aspx) for all AA departure metrics in years 2022-2024. Statistics are generated per origin airport. Compiled datasets are uploaded to the repository [here](url).
-
-Columns in this dataset include: **INCLUDE ERD HERE**
 
 |   column name       |     data type     |     column name     | data type           |   
 |  -------------------| ------------------| ------------------- |---------------------|           
