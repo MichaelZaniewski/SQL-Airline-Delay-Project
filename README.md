@@ -42,21 +42,24 @@ Prior to beginning the analysis, a variety of checks were conducted for quality 
 
 ## Executive Summary
 ### Overview of Findings
-The top two longest median delays are late aircraft arrivals followed closely by carrier delays, both of which are directly controllable by the airline. 
+American Airline's departure dependability struggles most in the afternoon due to rolling delays caused by late aircraft arrivals stemming from carrier delays on morning flights. For years 2022-2024, 31.19% of morning flights were delayed, climbing to 50.44% in the afternoon, a ratio of 1:2.7 morning to evening late departures. Digging deeper, there is a correlation with this data and that of delays caused specificially by controllable metrics. In the mornings, carrier delays are most prevelant while the afternoon points to late aircraft arrivals as the number one cause of late departures. 
 
 SQL queries used to extract insights can be found here (HYPERLINK)
 
 ### Findings:
+- American has instated 39 aircraft in 2023 and 17 in 2024 for a current fleet total of 971
+- 
 - Friday saw the highest total delay times with Tueday being the lowest (Figure 6)
 - There are signficantly more departures in the afternoon than the morning (Figure 7)
-- 31.19% of flights in the morning were delayed, while 50.44% in the afternoon were delayed, a ratio of 1:2.7 morning to evening late departures (Figures 7 & 8)
 - Out of the delayed flights in the morning, most are attributed to carrier delays, while delayed flights in the afternoon are heavily swayed towards late aircraft arrivals (Figure 8)
 - Late ac arrivals are the #1 cause for controllable late departues and have the highest maximum delay length of any delay, being the most detrimental adversary to on-time goals (Figure 5 and 3)
   
 ### Reccomendations
-- AA should look to implement a split-priority tactic of ensuring on-time departures in the first half of the operational day to prevent rolling delays, while shifting to enhancing cabin appearance in the latter half to impact the majority of customers. 
-- If a flight 
+- AA should look to implement a split-priority tactic of ensuring on-time departures in the first half of the operational day to prevent rolling delays, while shifting to enhancing cabin appearance and consumer experience in the latter half to impact the majority of customers.
+- 
+- Longer carrier delays are typically due to extensive maintenance issues therefore  
 
 - A/B testing using DCA base as the experimental group, (Have a high median carrier delay but significantly less departures per year relative to other bases. Easier to impliment change which standing to benefit the most. RECCOMEND A DAY OF WEEK AS WELL
 
+- Create an A/B test using DCA base as the experimental group. DCA is a smaller base with less traffic making it easier to impliment a testing strategy. It is also one of the bases struggling most with controllable delays allowing the results to be readily apparent
 
