@@ -15,10 +15,6 @@ Insights and reccomendations are provided on the following key areas:
 - Matching type of delay to scheduled departure time to test time-of-day influence
 - A/B testing split-prioritiy tactic at DCA
 - Increase percentage of maintenance, catering, and cabin cleaner staff in the morning or reposition shift changes to overlap in the morning
-  
-
-There are various types of delays, some controllable, some not. Those that are not directly controllable by the airline include weather, ATC, and security issues. Those that are directly controllable include carrier delays (maintinance issues, catering discrepancies, staffing shortages, etc) and late aircraft arrivals. These are the type of delays that will be primarily analyzed.
-
 
 Excel strategies and SQL queries used to inspect, clean, and perform quality checks can be found HERE (HYPERLINK)
  
