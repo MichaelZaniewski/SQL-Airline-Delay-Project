@@ -19,7 +19,7 @@ There are various types of delays, some controllable, some not. Those that are n
 
 Excel strategies and SQL queries used to inspect, clean, and perform quality checks can be found HERE (HYPERLINK)
  
-Targeted SQL queries used to extract and build insights  can be found here (HYPERLINK)
+Targeted SQL queries used to answer business questions and extract insights can be found here (HYPERLINK)
 
 A long form written 'company mindset' and 'reccomendation' report can be found HERE (HYPERLINK)
 
