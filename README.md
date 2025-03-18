@@ -21,7 +21,7 @@ Excel strategies and SQL queries used to inspect, clean, and perform quality che
  
 Targeted SQL queries used to answer business questions and extract insights can be found here (HYPERLINK)
 
-A long form written 'company mindset' and 'reccomendation' report can be found HERE (HYPERLINK)
+A long-form written report can be found HERE (HYPERLINK)
 
 ## DATASET
 The dataset for this project was gathered from the [Bureau of Transportation Statistics](https://www.transtats.bts.gov/ontime/departures.aspx) for all AA departure metrics in years 2022-2024. Statistics are generated per origin airport. Compiled datasets are uploaded to the repository [here](url).
