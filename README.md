@@ -10,10 +10,10 @@ American Airlines, established in 1926, is the worlds largest Airline in terms o
 The goal is to determine the top causes for departure delays and provide business reccomendations utilizing actionable insights to mitigate delays in accordance with the airline's future endeavors of enhancing the customer experience on-board. 
 
 Insights and reccomendations are provided on the following key areas:
-- Analyzing departure count to determine relative presence at hubs 
+- Analyzing departure count to determine relative presence at bases
+- Calculating median length of delays per category of delay per base
 - Matching type of delay to scheduled departure time to test time-of-day influence
-- Median length of delays per category per hub
-- A/B testing on PHL base 
+- A/B testing split-prioritiy tactic at DCA  
 
 There are various types of delays, some controllable, some not. Those that are not directly controllable by the airline include weather, ATC, and security issues. Those that are directly controllable include carrier delays (maintinance issues, catering discrepancies, staffing shortages, etc) and late aircraft arrivals. These are the type of delays that will be primarily analyzed.
 
@@ -65,7 +65,6 @@ SQL queries used to extract insights can be found here (HYPERLINK)
 - Being that late_ac_arrivals are the #1 cause of delayed flights , AA should focus on
 - Focus on on-time departures in the morning so the planes can operate on-time for the later departures then shift priority to customer experience during times when there are the most customers.
 
-- A/B testing using PHL base as the experimental group, the base that stands to improve the most from delays (figure 5)
-
+- A/B testing using DCA base as the experimental group, (Have a high median carrier delay but significantly less departures per year relative to other bases. Easier to impliment change which standing to benefit the most)
 
 
