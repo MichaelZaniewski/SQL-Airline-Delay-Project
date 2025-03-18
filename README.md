@@ -45,27 +45,21 @@ The dataset for this project was gathered from the [Bureau of Transportation Sta
 Prior to beginning the analysis, a variety of checks were conducted for quality control and familiarization with column relationships. The SQL queries used to inspect, clean, and perform quality checks can be found HERE (HYPERLINK)
 
 ## Executive Summary
-### Overview of findings
-
+### Overview of Findings
+The top two longest median delays are late aircraft arrivals followed closely by carrier delays, both of which are directly controllable by the airline. 
 
 SQL queries used to extract insights can be found here (HYPERLINK)
 
-
+### Findings:
 - Friday saw the highest total delay times with Tueday being the lowest (Figure 6)
 - There are signficantly more departures in the afternoon than the morning (Figure 7)
 - 31.19% of flights in the morning were delayed, while 50.44% in the afternoon were delayed, a ratio of 1:2.7 morning to evening late departures (Figures 7 & 8)
 - Out of the delayed flights in the morning, most are attributed to carrier delays, while delayed flights in the afternoon are heavily swayed towards late aircraft arrivals (Figure 8)
 - Late ac arrivals are the #1 cause for controllable late departues and have the highest maximum delay length of any delay, being the most detrimental adversary to on-time goals (Figure 5 and 3)
-
-
-- AA should look to implement a split-priority tactic of ensuring on-time departures in the first half of the operational day, while shifting to enhance cabin appearance in the latter half
-
-
-
-
-## RECCOMENDATIONS
-- Being that late_ac_arrivals are the #1 cause of delayed flights , AA should focus on
-- Focus on on-time departures in the morning so the planes can operate on-time for the later departures then shift priority to customer experience during times when there are the most customers.
+  
+### Reccomendations
+- AA should look to implement a split-priority tactic of ensuring on-time departures in the first half of the operational day to prevent rolling delays, while shifting to enhancing cabin appearance in the latter half to impact the majority of customers. 
+- If a flight 
 
 - A/B testing using DCA base as the experimental group, (Have a high median carrier delay but significantly less departures per year relative to other bases. Easier to impliment change which standing to benefit the most. RECCOMEND A DAY OF WEEK AS WELL
 
