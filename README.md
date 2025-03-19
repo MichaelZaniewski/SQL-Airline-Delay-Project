@@ -14,11 +14,11 @@ Insights and reccomendations are provided on the following key areas:
 - Total delay per flight to extrapolate information such as total delay time per day of week
 - Matching type of delay to scheduled departure time to test time-of-day influence
 - A/B testing split-prioritiy tactic at DCA
-- Increase percentage of maintenance, catering, and cabin cleaner staff in the morning or reposition shift changes to overlap in the morning
+- Increase presence of maintenance, catering, and cabin cleaner staff in the morning or reposition shift changes to overlap in the morning
 
 Excel strategies and SQL queries used to inspect, clean, and perform quality checks can be found HERE (HYPERLINK)
  
-Targeted SQL queries used to answer business questions and extract insights can be found here (HYPERLINK)
+Targeted SQL queries used to answer business questions and extract insights can be found [here](https://github.com/MichaelZaniewski/SQL-Airline-Delay-Project/blob/main/SQL%20Analysis%20Queries.md) 
 
 A long-form written report can be found HERE (HYPERLINK)
 
