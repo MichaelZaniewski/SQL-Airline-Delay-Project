@@ -45,19 +45,19 @@ Reviewing the data at face value uncovered some abnormalities
 - **An `actual_flt_time` of 0**. Could possibly be a diversion that voids the flight time
 
 To determine how many abnormal flights are in the dataset, this query was utilized:
+```
 SELECT COUNT(*)
 FROM delay
 WHERE  actual_flt_time = 0 
 OR tail_number IS NULL
 OR taxi_out_time = 0;
+```
+Abnormalities consist of 32K rows out of 1.5M. For the purposes of this project, only flights that have successfully departed and completed their route will be analyzed. Irregular flights will be removed using the same parameters specified for selecting them:
 
-Abnormalities consist of 32K rows out of 1.5M
-
-For the purposes of this project, only flights that have successfully departed and completed their route will be analyzed. 
-
-Irregular flights will be removed using the same parameters specified for selecting them:
-
-```DELETE FROM delay
+```
+DELETE FROM delay
 WHERE  actual_flt_time = 0 
 OR tail_number IS NULL
-OR taxi_out_time = 0```
+OR taxi_out_time = 0
+```
+
