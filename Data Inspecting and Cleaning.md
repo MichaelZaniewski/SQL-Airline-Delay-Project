@@ -11,6 +11,7 @@
  
 ## SQL - Data Importing and Cleaning
 ### Creating the table
+```
 CREATE TABLE delay(
   id SERIAL PRIMARY KEY,
   date DATE NOT NULL,
@@ -31,6 +32,7 @@ CREATE TABLE delay(
   security_delay INTEGER NOT NULL,
   late_ac_arrival_delay INTEGER NOT NULL
  )
+```
 
  Note: There are NULLs in tail_number so it cannot be NOT NULL for the data to import successfully 
 
