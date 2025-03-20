@@ -1,11 +1,10 @@
 ## Excel - Data Inspecting and Formatting
 1) Add ID column primary key but first order by date ASC
 2) Format date column
-3) Apply filter to all rows, search for blanks
-(Notice blanks in tail number)
-4) Notice abnormality in first few rows where actual flight time 0
-5) filter for actual flight time 0 
-6) Last step: take note of how many rows are in the dataset and what the last id number is 
+3) Apply a filter to all rows, searching for blanks or zeros
+- Some tail_numbers returned blank
+- Critial rows like actual_flt_time and taxi_out_time returned zeros 
+5) Last step: Take note of how many rows are in the dataset and what the last id number is to test later in SQL if all rows have properly imported
 
 
  
