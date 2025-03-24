@@ -59,14 +59,14 @@ Targeted SQL queries used to answer business questions and extract insights can 
 - Longer carrier delays are typically due to extensive maintenance issues, therefore, a minimum-spare-parts list should be implemented to ensure each airport has the equipment available to repair an aircraft, eliminating wait time for shipping
 - Create an A/B test using DCA base as the experimental group. DCA is a smaller base with less traffic making it easier to implement a testing strategy. It is also one of the bases struggling most with controllable delays, allowing results to be readily apparent
 
-## Assumptions, Caveats, and Limitations
+## Assumptions, Limitations, and a Caveat
 ### Assumptions
 - All recorded data is accurate and no additional flights are missing after removing nulls and obvious data input errors
 - The most frequent occurrences of carrier_delays are due to maintenance, catering, and cleaning. Other factors such as crew legalities are lesser.
-  
-### Caveats
-- Scheduled departures of major bases are not indicative of out-station schedules. Including out-stations in the analysis would impact percentage of flights departing in the mornings vs afternoons 
 
 ### Limitations
 - Maximum available data ends in october 2024, does not include the entire year
 - The inability to hone-in on specific aircraft through an entire day to see how each delay affected its subsequent routes and actual departure times
+  
+### Caveat
+- Scheduled departures of major bases are not indicative of out-station schedules. Including out-stations in the analysis would impact percentage of flights departing in the mornings vs afternoons 
