@@ -10,7 +10,7 @@ SELECT
 	COUNT(DISTINCT tail_number) - LAG(COUNT(DISTINCT tail_number),1) OVER () AS difference
 FROM delay
 GROUP BY EXTRACT(YEAR FROM date)
-ORDER BY YEAR
+ORDER BY YEAR;
 ```
 ### 2) How many departures from each base did AA operate in 2023? 
 ![Figure2](https://github.com/user-attachments/assets/af14b2fe-0a6c-482f-866f-3c39e10ce529)
@@ -24,7 +24,7 @@ FROM    (SELECT origin, id,
 	FROM delay)
 WHERE year = '2023'
 GROUP BY year, origin
-ORDER BY total_departures DESC
+ORDER BY total_departures DESC;
 ```
 ### 3) What was the maximum time for each category of delay?
 ![Figure3](https://github.com/user-attachments/assets/65c2495e-f904-4094-8542-d18de3cd35ce)
@@ -39,7 +39,7 @@ SELECT
 		MAX(national_aviation_sys_delay) max_atc_dly,
 		MAX(security_delay) AS max_security_dly,
 		MAX(late_ac_arrival_delay) AS max_late_ac_dly
-FROM delay
+FROM delay;
 ```
 ## DIGGING DEEPER
 ### 4) What were the top 5 most delayed flights and their primary cause?
@@ -68,7 +68,7 @@ FROM (SELECT *, COALESCE(SUM(almost_total_delay - departure_delay) FILTER(WHERE 
 	 GROUP BY id, date, origin, sched_departure, actual_departure, departure_delay, carrier_delay, weather_delay, national_aviation_sys_delay, security_delay, late_ac_arrival_delay, z.almost_total_delay) AS y
 GROUP BY date, origin, sched_departure, actual_departure, departure_delay, departure_delay, carrier_delay, weather_delay, national_aviation_sys_delay, security_delay, late_ac_arrival_delay, y.late_ac_arrival_delay, y.almost_total_delay, y.neg_difference, y.pos_difference
 ORDER BY total_delay DESC, late_ac_arrival_delay DESC
-LIMIT 5
+LIMIT 5;
 ```
 ### 5) What was the median delay length for each delay category per base for only situations where there was a delay? Bases are ranked from most to least delayed.
 ![Figure5](https://github.com/user-attachments/assets/00b29b96-4ffd-43d5-9008-7a9e35e774d9)
@@ -94,7 +94,7 @@ FROM (SELECT 	origin,
 		FROM delay
 		GROUP BY origin)
 GROUP BY origin, mdn_dept_dly, mdn_carrier_dly, mdn_weather_dly, mdn_atc_dly, mdn_security_dly, mdn_late_ac_dly
-ORDER BY total_mdn_dly DESC)
+ORDER BY total_mdn_dly DESC);
 ```
 ### 6) What day of the week saw the longest delays?
 ![Figure6](https://github.com/user-attachments/assets/d6b3171c-ed14-4322-92e2-6f7e12be7e66)
@@ -123,7 +123,7 @@ FROM (SELECT TO_CHAR(date, 'DAY') AS day_of_week,
 	GROUP BY date, id, origin, departure_delay, carrier_delay, weather_delay, national_aviation_sys_delay, security_delay, late_ac_arrival_delay, z.almost_total_delay) AS y
 	GROUP BY day_of_week, id, origin, departure_delay, carrier_delay, weather_delay, national_aviation_sys_delay, security_delay, late_ac_arrival_delay, y.almost_total_delay, y.neg_difference, y.pos_difference)
 GROUP BY day_of_week
-ORDER BY total_delay_time DESC
+ORDER BY total_delay_time DESC;
 ```
 ### 7) Of total flights, how many left in the morning vs afternoon? What percent of morning and afternoon flights departed on time vs late?
 ![Figure7](https://github.com/user-attachments/assets/7c15d4d4-447b-45d7-a2b9-f61f34a3606f)
@@ -142,7 +142,7 @@ FROM(SELECT *,
 	END AS time_of_day
 FROM delay)
 GROUP BY time_of_day 
-ORDER BY total_flights ASC
+ORDER BY total_flights ASC;
 ```
 ### 8) Of the flights that departed late, what percentage were mostly attributed to late aircraft delays and carrier delays for morning and afternoon departures?
 ![Figure8](https://github.com/user-attachments/assets/c46c364e-e4b5-49f8-a643-3b8a79a2f65c)
@@ -162,6 +162,6 @@ FROM	(SELECT *,
 		END AS time_of_day
 	FROM delay)
 GROUP BY time_of_day 
-ORDER BY count_delayed_departures ASC
+ORDER BY count_delayed_departures ASC;
 ```
 
