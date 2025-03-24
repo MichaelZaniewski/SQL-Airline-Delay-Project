@@ -13,14 +13,15 @@ Insights and reccomendations are provided on the following key areas:
 - Analyzing departure count to determine relative presence at bases
 - Total delay per flight to extrapolate information such as total delay time per day of week
 - Matching type of delay to scheduled departure time to test time of day influence
-- A/B testing split-prioritiy tactic depnding on the time of day at DCA
-- Increase presence of maintenance, catering, and cabin cleaner staff in the morning or reposition shift changes to overlap in the morning
-
+- Implementing a minimum spare parts list to ensure each airport has the equipment available to repair an aircraft
+- A/B testing split-prioritiy tactic depnding on the time of day at DCA airport
+  
+  
 Excel strategies and SQL queries used to inspect, clean, and perform quality checks can be found [here](https://github.com/MichaelZaniewski/SQL-Airline-Delay-Project/blob/main/Data%20Inspecting%20and%20Cleaning.md)
  
 Targeted SQL queries used to answer business questions and extract insights can be found [here](https://github.com/MichaelZaniewski/SQL-Airline-Delay-Project/blob/main/SQL%20Analysis%20Queries.md) 
 
-A long-form written report can be found HERE (HYPERLINK)
+A long-form written report can be found [here](https://docs.google.com/document/d/1FbklT3wubcDVVe8UjOMpISShDmbYRQFbfnnLsYlv4DM/edit?usp=sharing)
 
 ## Data Structure and Info
 The dataset for this project was gathered from the [Bureau of Transportation Statistics](https://www.transtats.bts.gov/ontime/departures.aspx) for all AA departure metrics in years 2022-2024. Statistics are generated per origin airport. Compiled datasets can be downloaded from a google drive folder [here](https://drive.google.com/drive/folders/149eeRoGHqdNVELTDj48WXwkjbDq19Gq3?usp=drive_link).
@@ -55,7 +56,7 @@ SQL queries used to extract insights can be found [here](https://github.com/Mich
   
 ### Reccomendations
 - AA should look to implement a split-priority tactic of ensuring on-time departures in the first half of the operational day to prevent rolling delays, while shifting to enhancing cabin appearance and consumer experience in the latter half of the day to impact the majority of customers.
-- Create an A/B test using DCA base as the experimental group. DCA is a smaller base with less traffic making it easier to impliment a testing strategy. It is also one of the bases struggling most with controllable delays allowing results to be readily apparent.
-- Longer carrier delays are typically due to extensive maintenance issues therefore  
+- Longer carrier delays are typically due to extensive maintenance issues, therefore, a minimum spare parts list should be implimented to ensure each airport has the equiptment available to repair an aircraft
+- Create an A/B test using DCA base as the experimental group. DCA is a smaller base with less traffic making it easier to impliment a testing strategy. It is also one of the bases struggling most with controllable delays, allowing results to be readily apparent.  
 
 
