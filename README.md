@@ -17,7 +17,7 @@ Insights and reccomendations are provided on the following key areas:
 - A/B testing split-prioritiy tactic depnding on the time of day at DCA airport
   
   
-Excel strategies and SQL queries used to inspect, clean, and perform quality checks can be found [here](https://github.com/MichaelZaniewski/SQL-Airline-Delay-Project/blob/main/Data%20Inspecting%20and%20Cleaning.md)
+Excel strategies and SQL queries used to inspect, clean, and perform quality checks can be found [here](https://github.com/MichaelZaniewski/SQL-Airline-Delay-Project/blob/main/Excel%20and%20SQL%20Quality%20Checks.md)
  
 Targeted SQL queries used to answer business questions and extract insights can be found [here](https://github.com/MichaelZaniewski/SQL-Airline-Delay-Project/blob/main/SQL%20Analysis%20Queries.md) 
 
