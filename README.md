@@ -2,12 +2,12 @@
 
 # SQL-Airline-Delay-Project
 
-An analysis of American Airlines' departure statistics to determine what and how the airline can implement to achieve more on-time departures while balancing an enhanced customer experience.
+An analysis of American Airlines' departure statistics to determine what the airline can implement to optimize and improve operational dependability in accordance with future endeavors of enhancing the customer experience on-board.
 
 ## Background and Overview
-American Airlines, established in 1926, is the world's largest Airline in terms of quantity of flights and passengers carried daily. This project is focused on American's nine largest hubs: DFW, CLT, MIA, PHX, ORD, PHL, LAX, DCA, and JFK.
+American Airlines, established in 1926, is the world's largest Airline in terms of quantity of flights and passengers carried daily. The purpose of the project is to determine the top causes of delayed departures to illustrate where the airline struggles most, and provide business recommendations utilizing actionable insights to mitigate delays. 
 
-The goal is to determine the top causes for departure delays and provide business recommendations utilizing actionable insights to mitigate delays in accordance with the airline's future endeavors of enhancing the customer experience on-board. 
+This project is focused on American's nine largest hubs: DFW, CLT, MIA, PHX, ORD, PHL, LAX, DCA, and JFK.
 
 Insights and recommendations are provided on the following key areas:
 - Analyzing departure count to determine relative presence at bases
