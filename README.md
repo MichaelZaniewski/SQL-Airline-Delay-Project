@@ -47,16 +47,16 @@ American Airline's departure dependability struggles most in the afternoon due t
 
 ### Findings:
 - American has instated 39 aircraft in 2023 and 17 in 2024 for a current fleet total of 971
-- Friday saw the highest total delay times with Tueday being the lowest 
-- There are signficantly more departures in the afternoon than the morning 
+- Friday saw the highest total delay times with Tueday being the lowest
+- There are signficantly more departures in the afternoon than the morning
 - Of controllable delays, most are due to carrier delays in the mornings while flights in the afternoon are heavily swayed towards late aircraft arrivals
 - Late aircraft arrivals are the #1 cause of controllable late departues and have the highest maximum delay length of any delay, being the most detrimental adversary to on-time goals
 
 Targeted SQL queries used to answer business questions and extract insights can be found [here](https://github.com/MichaelZaniewski/SQL-Airline-Delay-Project/blob/main/SQL%20Analysis%20Queries.md) 
   
 ### Reccomendations
-- AA should look to implement a split-priority tactic of ensuring on-time departures in the first half of the operational day to prevent rolling delays, while shifting to enhancing cabin appearance and consumer experience in the latter half of the day to impact the majority of customers.
+- AA should look to implement a split-priority tactic of ensuring on-time departures in the first half of the operational day to prevent rolling delays, while shifting to enhancing cabin appearance and consumer experience in the latter half of the day to impact the majority of customers
 - Longer carrier delays are typically due to extensive maintenance issues, therefore, a minimum spare parts list should be implimented to ensure each airport has the equiptment available to repair an aircraft
-- Create an A/B test using DCA base as the experimental group. DCA is a smaller base with less traffic making it easier to impliment a testing strategy. It is also one of the bases struggling most with controllable delays, allowing results to be readily apparent.  
+- Create an A/B test using DCA base as the experimental group. DCA is a smaller base with less traffic making it easier to impliment a testing strategy. It is also one of the bases struggling most with controllable delays, allowing results to be readily apparent
 
 
