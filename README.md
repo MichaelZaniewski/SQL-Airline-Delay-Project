@@ -12,11 +12,11 @@ The goal is to determine the top causes for departure delays and provide busines
 Insights and reccomendations are provided on the following key areas:
 - Analyzing departure count to determine relative presence at bases
 - Total delay per flight to extrapolate information such as total delay time per day of week
-- Matching type of delay to scheduled departure time to test time-of-day influence
-- A/B testing split-prioritiy tactic at DCA
+- Matching type of delay to scheduled departure time to test time of day influence
+- A/B testing split-prioritiy tactic depnding on the time of day at DCA
 - Increase presence of maintenance, catering, and cabin cleaner staff in the morning or reposition shift changes to overlap in the morning
 
-Excel strategies and SQL queries used to inspect, clean, and perform quality checks can be found HERE (HYPERLINK)
+Excel strategies and SQL queries used to inspect, clean, and perform quality checks can be found [here](https://github.com/MichaelZaniewski/SQL-Airline-Delay-Project/blob/main/Data%20Inspecting%20and%20Cleaning.md)
  
 Targeted SQL queries used to answer business questions and extract insights can be found [here](https://github.com/MichaelZaniewski/SQL-Airline-Delay-Project/blob/main/SQL%20Analysis%20Queries.md) 
 
@@ -44,14 +44,14 @@ Prior to beginning the analysis, a variety of checks were conducted for quality 
 ### Overview of Findings
 American Airline's departure dependability struggles most in the afternoon due to rolling delays caused by late aircraft arrivals stemming from carrier delays on morning flights. For years 2022-2024, 31.19% of morning flights were delayed, climbing to 50.44% in the afternoon, a ratio of 1:2.7 morning to evening late departures. Digging deeper, there is a correlation with this data and that of delays caused specificially by controllable metrics. In the mornings, carrier delays are most prevelant while the afternoon points to late aircraft arrivals as the number one cause of late departures. 
 
-SQL queries used to extract insights can be found [here](https://github.com/MichaelZaniewski/SQL-Airline-Delay-Project/blob/main/SQL%20Analysis%20Queries.md)
-
 ### Findings:
 - American has instated 39 aircraft in 2023 and 17 in 2024 for a current fleet total of 971
 - Friday saw the highest total delay times with Tueday being the lowest 
 - There are signficantly more departures in the afternoon than the morning 
 - Of controllable delays, most are due to carrier delays in the mornings while flights in the afternoon are heavily swayed towards late aircraft arrivals
 - Late aircraft arrivals are the #1 cause of controllable late departues and have the highest maximum delay length of any delay, being the most detrimental adversary to on-time goals
+
+SQL queries used to extract insights can be found [here](https://github.com/MichaelZaniewski/SQL-Airline-Delay-Project/blob/main/SQL%20Analysis%20Queries.md)
   
 ### Reccomendations
 - AA should look to implement a split-priority tactic of ensuring on-time departures in the first half of the operational day to prevent rolling delays, while shifting to enhancing cabin appearance and consumer experience in the latter half of the day to impact the majority of customers.
