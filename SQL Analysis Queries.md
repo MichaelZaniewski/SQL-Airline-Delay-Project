@@ -14,8 +14,8 @@ ORDER BY YEAR;
 ```
 ### 2) How many departures from each base did AA operate in 2023? 
 ![Figure2](https://github.com/user-attachments/assets/af14b2fe-0a6c-482f-866f-3c39e10ce529)
-- **Methodology:** Aggregated a year column using EXTRACT() function, COUNT() to see total_departures, allowing viewers to gain a relative understanding of airline presence per airport. Ranked for easy viewing ability. 
-- **Insights Gained:** AA has the largest presence in DFW by far, and the smallest in JFK.  
+- **Methodology:** Aggregated a year column using EXTRACT() function, COUNT() to see total_departures, allowing viewers to gain a relative understanding of airline presence per airport. Ranked for easy viewing ability 
+- **Insights Gained:** AA has the largest presence in DFW by far, and the smallest in JFK  
 ```
 SELECT origin, COUNT(*) as total_departures,
 	RANK() OVER (ORDER BY COUNT(*) DESC) as RANK		
@@ -147,7 +147,7 @@ ORDER BY total_flights ASC;
 ### 8) Of the flights that departed late, what percentage were mostly attributed to late aircraft delays and carrier delays for morning and afternoon departures?
 ![Figure8](https://github.com/user-attachments/assets/c46c364e-e4b5-49f8-a643-3b8a79a2f65c)
 - **Methodology:** Calling back the same subquery, COUNT rows where either `carrier_delay` or `late_ac_arrival_delay` are greater and divide by total delayed flights and use TO_CHAR TO convert to percentage to achieve actionable insights on controllable delays
-- **Insights Gained:** Digging deeper into percentages of controllable departure metrics, AA struggles most with carrier delays in the mornings and late aircraft arrivals in the afternoon. These numbers insinuate that early carrier delays play a part in creating late afternoon arrivals as the plane attempts to continue its route through the day.
+- **Insights Gained:** Digging deeper into percentages of controllable departure metrics, AA struggles most with carrier delays in the mornings and late aircraft arrivals in the afternoon. These numbers insinuate that early carrier delays play a part in creating late afternoon arrivals as the plane attempts to continue its route through the day
 ```
 SELECT time_of_day, 
 	COUNT(*) FILTER(WHERE departure_delay > 0) AS count_delayed_departures,
