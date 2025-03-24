@@ -2,7 +2,7 @@
 
 # SQL-Airline-Delay-Project
 
-An analysis of American Airlines' departure statistics to determine what and how the airline can optimize to achieve more on-time departures while balancing an enhanced customer experience.
+An analysis of American Airlines' departure statistics to determine what and how the airline can implement to achieve more on-time departures while balancing an enhanced customer experience.
 
 ## Background and Overview
 American Airlines, established in 1926, is the world's largest Airline in terms of quantity of flights and passengers carried daily. This project is focused on American's nine largest hubs: DFW, CLT, MIA, PHX, ORD, PHL, LAX, DCA, and JFK.
