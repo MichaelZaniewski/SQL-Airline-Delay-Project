@@ -39,7 +39,7 @@ The dataset for this project was gathered from the [Bureau of Transportation Sta
 | sched_flt_time      |       integer     | late_ac_arrival_delay| integer            |
 
 
-Prior to beginning the analysis, a variety of checks were conducted for quality control and familiarization with column relationships. The SQL queries used to inspect, clean, and perform quality checks can be found HERE (HYPERLINK)
+Prior to beginning the analysis, a variety of checks were conducted for quality control and familiarization with column relationships. The SQL queries used to inspect, clean, and perform quality checks can be found [here](https://github.com/MichaelZaniewski/SQL-Airline-Delay-Project/blob/main/Excel%20and%20SQL%20Quality%20Checks.md).
 
 ## Executive Summary
 ### Overview of Findings
