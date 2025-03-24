@@ -12,7 +12,7 @@ Step 3: Apply a filter to all columns and search for blanks (NULLS). `tail_numbe
 Step 4: Glance over and filter further for abnormalities such as rows where `actual_flt_time` = 0 and `taxi_out_time` = 0. 
 ![excel4](https://github.com/user-attachments/assets/fa111944-e6a0-40b9-be03-8fb52d1937c7)
 
-Step 5: Repeat steps 1-4 for the second CSV. Take note of the last generated ID row and begin labling IDs with the next sequential number in the second CSV to ensure all data is uniquely labeled with no duplicates.
+Step 5: Repeat steps 1-4 for the second CSV. Take note of the last generated ID row and begin labeling IDs with the next sequential number in the second CSV to ensure all data is uniquely labeled with no duplicates.
 
 ## SQL - Importing and Cleaning
 Step 1: Generate a table that matches the column names and datatypes of the CSV dataset.
@@ -37,15 +37,15 @@ CREATE TABLE delay(
   national_aviation_sys_delay INT NOT NULL,
   security_delay INTEGER NOT NULL,
   late_ac_arrival_delay INTEGER NOT NULL
- )
+ );
 ```
-Note: Since there are NULLs in `tail_number`, the column cannot be constrained as NOT NULL in order for the data to import successfully. To test if all rows imported properly, select COUNT(id). Output should be 1,546,452
+Note: Since there are NULLs in `tail_number`, the column cannot be constrained as NOT NULL in order for the data to import successfully. To test if all rows have been imported properly, select COUNT(id). Output should be 1,546,452
 
 Step 2: Recall and review NULL cells and data abnormalities
-- **NULL `tail_number`:**. Most likely due to a cancellation prior to being assigned an aircraft
+- **NULL `tail_number`:**. Most likely due to a cancellation prior to being assigned an aircraft.
 - **A `taxi_out_time` of 0:** Every aircraft has to have a taxi time of greater than zero as no aircraft can push back and takeoff within the same minute. This is a data input error.
-- **An `actual_departure` time of 00:00:00 AND `wheels_up_time` of 00:00:00:** Cannot happen for the sam reason previously stated
--  **An `actual_flt_time` of 0:** Could possibly be a diversion that voids flight time
+- **An `actual_departure` time of 00:00:00 AND `wheels_up_time` of 00:00:00:** Cannot happen for the same reason previously stated.
+-  **An `actual_flt_time` of 0:** Could possibly be a diversion that voids flight time.
   
 To determine how many abnormal flights are in the dataset, this query was utilized:
 ```
@@ -57,7 +57,12 @@ OR taxi_out_time = 0;
 ```
 Output is 32K rows out of 1.5M
 
-For the purposes of this project, only flights that have successfully departed and completed their route will be analyzed. Irreggular flights will be removed using the same paramaters specified for selecting them.
-
+For the purposes of this project, only flights that have successfully departed and completed their route will be analyzed. Irregular flights will be removed using the same parameters specified for selecting them.
+```
+REMOVE FROM delay
+WHERE  actual_flt_time = 0 
+OR tail_number IS NULL
+OR taxi_out_time = 0;
+```
 **Note:** The .CSVs in the repository will still include these flights.
 
