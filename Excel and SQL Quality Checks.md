@@ -1,4 +1,4 @@
-## Excel and SQL Data Quality Checks
+# Excel and SQL Data Quality Checks
 
 ## Excel - Initial View and Formatting
 Step 1: Add an ID column to act as a primary key for the table, allowing the user to uniquely identify each record. 
