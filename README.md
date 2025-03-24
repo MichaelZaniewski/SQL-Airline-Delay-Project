@@ -13,7 +13,7 @@ Insights and reccomendations are provided on the following key areas:
 - Analyzing departure count to determine relative presence at bases
 - Total delay per flight to extrapolate information such as total delay time per day of week
 - Matching type of delay to scheduled departure time to test time of day influence
-- Implementing a minimum spare parts list to ensure each airport has the equipment available to repair an aircraft
+- Implementing a minimum-spare-parts list
 - A/B testing split-prioritiy tactic depnding on the time of day at DCA airport
   
   
@@ -56,7 +56,7 @@ Targeted SQL queries used to answer business questions and extract insights can 
   
 ### Reccomendations
 - AA should look to implement a split-priority tactic of ensuring on-time departures in the first half of the operational day to prevent rolling delays, while shifting to enhancing cabin appearance and consumer experience in the latter half of the day to impact the majority of customers
-- Longer carrier delays are typically due to extensive maintenance issues, therefore, a minimum spare parts list should be implimented to ensure each airport has the equiptment available to repair an aircraft
+- Longer carrier delays are typically due to extensive maintenance issues, therefore, a minimum spare parts list should be implimented to ensure each airport has the equiptment available to repair an aircraft, eliminating wait time for shipping
 - Create an A/B test using DCA base as the experimental group. DCA is a smaller base with less traffic making it easier to impliment a testing strategy. It is also one of the bases struggling most with controllable delays, allowing results to be readily apparent
 
 
