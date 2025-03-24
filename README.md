@@ -52,7 +52,7 @@ American Airline's departure dependability struggles most in the afternoon due t
 - Of controllable delays, most are due to carrier delays in the mornings while flights in the afternoon are heavily swayed towards late aircraft arrivals
 - Late aircraft arrivals are the #1 cause of controllable late departues and have the highest maximum delay length of any delay, being the most detrimental adversary to on-time goals
 
-SQL queries used to extract insights can be found [here](https://github.com/MichaelZaniewski/SQL-Airline-Delay-Project/blob/main/SQL%20Analysis%20Queries.md)
+Targeted SQL queries used to answer business questions and extract insights can be found [here](https://github.com/MichaelZaniewski/SQL-Airline-Delay-Project/blob/main/SQL%20Analysis%20Queries.md) 
   
 ### Reccomendations
 - AA should look to implement a split-priority tactic of ensuring on-time departures in the first half of the operational day to prevent rolling delays, while shifting to enhancing cabin appearance and consumer experience in the latter half of the day to impact the majority of customers.
