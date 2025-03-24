@@ -2,12 +2,15 @@
 
 ## Excel - Initial View and Formatting
 Step 1: Add an ID column to act as a primary key for the table, allowing the user to uniquely identify each record. 
+![excel1](https://github.com/user-attachments/assets/c4e38120-fde3-49b7-8a23-1f6e33712a8d)
 
 Step 2: Format the date column by right clicking on the column and selecting "format cells." SQL only accepts dates in YYYY-MM-DD and will return an error upon import if the data structure does not match. 
 
 Step 3: Apply a filter to all columns and search for blanks (NULLS). `tail_number` is the only column with blanks
+![excel3](https://github.com/user-attachments/assets/e01f0f39-b43d-4df7-9306-d64e761e8b2a)
 
 Step 4: Glance over and filter further for abnormalities such as rows where `actual_flt_time` = 0 and `taxi_out_time` = 0. 
+![excel4](https://github.com/user-attachments/assets/fa111944-e6a0-40b9-be03-8fb52d1937c7)
 
 Step 5: Repeat steps 1-4 for the second CSV. Take note of the last generated ID row and begin labling IDs with the next sequential number in the second CSV to ensure all data is uniquely labeled with no duplicates.
 
