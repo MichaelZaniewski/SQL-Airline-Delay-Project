@@ -56,7 +56,17 @@ Targeted SQL queries used to answer business questions and extract insights can 
   
 ### Recommendations
 - AA should look to implement a split-priority tactic of ensuring on-time departures in the first half of the operational day to prevent rolling delays, while shifting to enhancing cabin appearance and consumer experience in the latter half of the day to impact the majority of customers
-- Longer carrier delays are typically due to extensive maintenance issues, therefore, a minimum spare parts list should be implemented to ensure each airport has the equipment available to repair an aircraft, eliminating wait time for shipping
+- Longer carrier delays are typically due to extensive maintenance issues, therefore, a minimum-spare-parts list should be implemented to ensure each airport has the equipment available to repair an aircraft, eliminating wait time for shipping
 - Create an A/B test using DCA base as the experimental group. DCA is a smaller base with less traffic making it easier to implement a testing strategy. It is also one of the bases struggling most with controllable delays, allowing results to be readily apparent
 
+## Assumptions, Caveats, and Limitations
+### Assumptions
+- All recorded data is accurate and no additional flights are missing after removing nulls and obvious data input errors
+- The most frequent occurances of carrier_delays are due to maintenance, catering, and cleaning. Other factors such as crew legalities are lesser.
+  
+### Caveats
+- Departure dependability of bases is not neccessarily indicative of out-station performance, or vise versa
 
+### Limitations
+- Maximum available data ends in october 2024, does not include the entire year
+- The inability to hone-in on specific aircraft routes through an entire day to see how each delay affected its subsequent scheduled departure time
