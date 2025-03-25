@@ -1,7 +1,8 @@
 # Excel and SQL Data Quality Checks
 
 ## Excel - Initial View and Formatting
-Step 1: Combined multiple CSVs into a master file within the 1M row limit of excel
+Step 1: Combined multiple CSVs into a master file within the 1M row limit of excel.
+
 Step 2: Add an ID column to act as a primary key for the table, allowing the user to uniquely identify each record. 
 ![excel1](https://github.com/user-attachments/assets/c4e38120-fde3-49b7-8a23-1f6e33712a8d)
 
